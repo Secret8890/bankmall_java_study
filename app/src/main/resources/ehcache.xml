@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+	updateCheck="false">
+
+	<diskStore path="java.io.tmpdir" />
+
+	<cache name="deviceByToken"
+		maxElementsInMemory="2000"
+		eternal="false"
+		overflowToDisk="false"
+		timeToIdleSeconds="3000"
+		timeToLiveSeconds="6000"
+		memoryStoreEvictionPolicy="LRU" />
+
+</ehcache>

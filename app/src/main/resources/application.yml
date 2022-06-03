@@ -1,0 +1,70 @@
+server:
+  port: 20000
+
+spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 1GB
+  output:
+    ansi:
+      enabled: always
+  profiles:
+    active: local,file
+  main:
+    allow-bean-definition-overriding: true
+
+app:
+  name: template-serv
+  oauth:
+    client-id: template-serv
+    client-secret: flqbvkt!@
+    token-signing-key: ${app.oauth.client-secret}:${app.oauth.client-id}
+    token-validity-seconds: 0
+    refresh-token-validity-seconds: 0
+#  aws:
+#    end-point: https://s3.amazonaws.com
+#    region-name: ap-northeast-2
+
+storage:
+  location: ./files
+
+---
+
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://in.actbase.io:3306/template_serv?zeroDateTimeBehavior=convertToNull&autoReconnection=true&autoReconnectForPools=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8
+    username: actbase_serv
+    password: actbaseServ!2
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+
+app:
+  host: localhost:20000
+  url: http://${app.host}
+  default_admin:
+    username: test
+    password: test
+
+logging:
+  level:
+    com.template: debug
+    org.hibernate.type.descriptor.sql: trace
+    org.hibernate.SQL: debug
+    org.springframework.security.web: debug
+  logback:
+    rollingpolicy:
+      max-file-size: 100MB
+      max-history: 10
+      file-name-pattern: ${app.host}.%d{yyyy-MM-dd}-%i.log
