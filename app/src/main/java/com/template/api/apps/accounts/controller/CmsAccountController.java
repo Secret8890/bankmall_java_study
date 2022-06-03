@@ -19,13 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/v1/cms/account")
 @Secured({"ROLE_ADMIN"})
 public class CmsAccountController {
-
-    @Qualifier("QAccountServiceImpl")
-    private final AccountService accountService;
-
-    @ApiOperation(value = "모든 계정 목록 조회 (QueryDSL)")
-    @GetMapping()
-    public PagableDto.Response<AccountDto.Response> getAccounts(AccountDto.Request request) {
-        return accountService.getPageAccounts(request);
-    }
+    // todo : 회원 정보 변경 구현
+    
+    // todo : 회원 탈퇴 구현
 }
