@@ -58,6 +58,19 @@ public class AccountDto {
     @Setter
     @ApiModel("AccountDto_Create")
     public static class Create {
+
+        @ApiModelProperty(value = "사용자 id")
+        private String userId;
+
+        @ApiModelProperty(value = "사용자 명")
+        private String name;
+
+        @ApiModelProperty(value = "패스워드")
+        private String password;
+
+        @ApiModelProperty(value = "생성시간")
+        @BaseDateTimeFormat
+        private LocalDateTime createdAt;
     }
 
     @Getter

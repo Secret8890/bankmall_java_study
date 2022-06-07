@@ -3,6 +3,7 @@ package com.template.api.apps.accounts.service;
 import com.template.api.apps.accounts.domain.Account;
 import com.template.api.apps.accounts.domain.AccountRepository;
 import com.template.api.apps.accounts.dto.AccountDto;
+import com.template.api.apps.accounts.dto.AccountDtoMapper;
 import com.template.api.jpa.Restrictions;
 import com.template.api.utils.dtos.PagableDto;
 import lombok.RequiredArgsConstructor;
@@ -71,8 +72,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto.Response createAccount(AccountDto.Create create) {
-        return null;
+    @Transactional
+    public void createAccount(AccountDto.Create create) {
+
+        Account account = AccountDtoMapper.INSTANCE.create(create);
+
+        accountRepository.save(account);
+
     }
 
     @Override

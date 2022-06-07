@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,8 +27,18 @@ public class AccountController {
         return accountService.getPageAccounts(request);
     }
 
+
+
     // todo : 회원가입 구현
 
+    @ApiOperation(value = "회원가입")
+    @PostMapping
+    public void createAccount(AccountDto.Create create) {
+        //return accountService.getPageAccounts(request);
+        accountService.createAccount(create);
+    }
+
     // todo : 회원탈퇴 구현
+
 
 }
