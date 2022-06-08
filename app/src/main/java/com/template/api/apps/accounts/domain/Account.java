@@ -17,11 +17,16 @@ import lombok.Setter;
 public class Account extends BaseDomainWithId implements DomainWithMapper<AccountDto.Response> {
 
     @Column(nullable = false, unique = true)
+
     private String userId;
 
     private String password;
 
     private String name;
+
+    private String upuserID;
+
+    private String uppassword;
 
     @Override
     public AccountDto.Response toResponse() {

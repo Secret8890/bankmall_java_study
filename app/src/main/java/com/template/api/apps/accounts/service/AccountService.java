@@ -1,5 +1,6 @@
 package com.template.api.apps.accounts.service;
 
+import com.template.api.apps.accounts.domain.Account;
 import com.template.api.apps.accounts.dto.AccountDto;
 import com.template.api.utils.dtos.PagableDto;
 
@@ -11,6 +12,11 @@ public interface AccountService {
     List<AccountDto.Response> getAccounts(AccountDto.Request request);
     AccountDto.Response getAccount(long id);
     void createAccount(AccountDto.Create create);
-    AccountDto.Response updateAccount(long id, AccountDto.Update update);
     AccountDto.Response deleteAccount(long id);
+
+    void updateAccount(AccountDto.Update update);
+
+    AccountDto.Update updateAccount(long id);
+
 }
+

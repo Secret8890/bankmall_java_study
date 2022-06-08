@@ -6,11 +6,13 @@ import com.google.common.collect.Maps;
 import com.template.api.apps.accounts.domain.Account;
 import com.template.api.utils.dtos.PagableDto;
 import com.template.api.utils.interfaces.BaseDateTimeFormat;
+import com.template.api.utils.interfaces.BaseDateTimeMillisFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.MapsId;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -68,15 +70,30 @@ public class AccountDto {
         @ApiModelProperty(value = "패스워드")
         private String password;
 
-        @ApiModelProperty(value = "생성시간")
-        @BaseDateTimeFormat
-        private LocalDateTime createdAt;
+//        @ApiModelProperty(value = "생성시간")
+//        @BaseDateTimeFormat
+//        private LocalDateTime createdAt;
     }
 
     @Getter
     @Setter
     @ApiModel("AccountDto_Update")
     public static class Update {
+        @ApiModelProperty(value = "사용자 id")
+        private String userId;
+
+        @ApiModelProperty(value = "사용자 명")
+        private String name;
+
+        @ApiModelProperty(value = "패스워드")
+        private String password;
+
+        @ApiModelProperty(value = "변경할 패스워드")
+        private String uppassword;
+
+        @ApiModelProperty(value = "변경할 id")
+        private String upuserId;
+
     }
 
     //endregion

@@ -8,6 +8,7 @@ import com.template.api.jpa.Restrictions;
 import com.template.api.utils.dtos.PagableDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
+import org.bouncycastle.asn1.dvcs.DVCSObjectIdentifiers;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
@@ -81,13 +82,27 @@ public class AccountServiceImpl implements AccountService {
 
     }
 
-    @Override
-    public AccountDto.Response updateAccount(long id, AccountDto.Update update) {
+
+    @Transactional
+    public AccountDto.Update updateAccount(long id, AccountDto.Update update) {
+
         return null;
     }
-
     @Override
     public AccountDto.Response deleteAccount(long id) {
         return null;
     }
+
+    @Override
+    @Transactional
+    public void updateAccount(AccountDto.Update update) {
+        Account up = AccountDtoMapper.INSTANCE.update(update);
+    accountRepository.save(up);
+    }
+
+    @Override
+    public AccountDto.Update updateAccount(long id) {
+        return null;
+    }
+
 }

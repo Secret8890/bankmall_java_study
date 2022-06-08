@@ -15,4 +15,6 @@ public interface AccountDtoMapper extends BaseDtoMapper<Account, AccountDto.Resp
 
   Account create(AccountDto.Create create);
 
+  Account update(AccountDto.Update update);
 }
+
