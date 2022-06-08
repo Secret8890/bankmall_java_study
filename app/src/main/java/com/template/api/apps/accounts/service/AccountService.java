@@ -12,5 +12,6 @@ public interface AccountService {
     AccountDto.Response getAccount(long id);
     void createAccount(AccountDto.Create create);
     AccountDto.Response updateAccount(long id, AccountDto.Update update);
-    AccountDto.Response deleteAccount(long id);
+    void deleteAccount(long id);
+
 }

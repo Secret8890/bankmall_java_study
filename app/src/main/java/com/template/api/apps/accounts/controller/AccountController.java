@@ -5,12 +5,10 @@ import com.template.api.apps.accounts.service.AccountService;
 import com.template.api.utils.dtos.PagableDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {"00. [USER] 회원관리 API"})
 @RestController
@@ -39,6 +37,14 @@ public class AccountController {
     }
 
     // todo : 회원탈퇴 구현
-
+    @ApiOperation(value = "회원탈퇴")
+    @DeleteMapping
+    public void deleteAccount(Long id) throws NotFoundException {
+        if(id != null) {
+            accountService.deleteAccount(id);
+        } else {
+            throw new NotFoundException("아이디가 전달되지않았습니다.");
+        }
+    }
 
 }

@@ -86,8 +86,11 @@ public class AccountServiceImpl implements AccountService {
         return null;
     }
 
+
+    @Transactional
     @Override
-    public AccountDto.Response deleteAccount(long id) {
-        return null;
+    public void deleteAccount(long id) {
+        accountRepository.deleteById(id);
+        //return null;
     }
 }
