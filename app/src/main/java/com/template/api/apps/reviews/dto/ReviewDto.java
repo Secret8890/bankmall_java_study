@@ -1,11 +1,18 @@
 package com.template.api.apps.reviews.dto;
 
+import com.template.api.utils.dtos.PagableDto;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Data
 public class ReviewDto {
+
+    @Getter
+    @Setter
+    public static class Request extends PagableDto.Request {
+        private String keyword;
+    }
 
     @Getter
     @Setter

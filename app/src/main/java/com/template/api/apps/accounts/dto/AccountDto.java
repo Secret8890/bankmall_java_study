@@ -1,23 +1,13 @@
 package com.template.api.apps.accounts.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.template.api.apps.accounts.domain.Account;
 import com.template.api.utils.dtos.PagableDto;
 import com.template.api.utils.interfaces.BaseDateTimeFormat;
-import com.template.api.utils.interfaces.BaseDateTimeMillisFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.MapsId;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class AccountDto {
 
@@ -27,10 +17,8 @@ public class AccountDto {
     @Setter
     @ApiModel("AccountDto_Request")
     public static class Request extends PagableDto.Request {
-
         @ApiModelProperty(value = "검색어", position = 2)
         private String keyword;
-
     }
 
     @Getter
@@ -87,12 +75,6 @@ public class AccountDto {
 
         @ApiModelProperty(value = "패스워드")
         private String password;
-
-        @ApiModelProperty(value = "변경할 패스워드")
-        private String uppassword;
-
-        @ApiModelProperty(value = "변경할 id")
-        private String upuserId;
 
     }
 

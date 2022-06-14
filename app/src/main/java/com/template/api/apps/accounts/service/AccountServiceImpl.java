@@ -6,9 +6,9 @@ import com.template.api.apps.accounts.dto.AccountDto;
 import com.template.api.apps.accounts.dto.AccountDtoMapper;
 import com.template.api.jpa.Restrictions;
 import com.template.api.utils.dtos.PagableDto;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
-import org.bouncycastle.asn1.dvcs.DVCSObjectIdentifiers;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
@@ -28,7 +28,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 @Primary
 @Qualifier("AccountServiceImpl")
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService{
 
     private final AccountRepository accountRepository;
 
@@ -93,15 +93,39 @@ public class AccountServiceImpl implements AccountService {
         return null;
     }
 
+
     @Override
     @Transactional
-    public void updateAccount(AccountDto.Update update) {
-        Account up = AccountDtoMapper.INSTANCE.update(update);
-    accountRepository.save(up);
+    public void updateAccount(Long id, AccountDto.Update update) throws NotFoundException {
+
+
+//         1. 매퍼쓰기
+//        Account account = accountRepository.findById(id).orElse(null);
+//        if(account != null) {
+//            AccountDtoMapper.INSTANCE.update(update, account);
+//        }
+//        2. GET & SET
+        Account account = accountRepository.findById(id).orElse(null);
+        if(account != null) {
+            account.setUserId(update.getUserId());
+            account.setPassword(update.getPassword());
+            account.setName(update.getName());
+        } else {
+            throw new NotFoundException("해당 아이디의 유저가 없습니다.");
+        }
+        //3. lamda
+        //Account account = accountRepository.findById(id).orElseThrow(()->new NotFoundException("아이디를 찾을 수 없습니다."));
+        //account.setName(update.getName());
+        //이하 동일
+
     }
 
     @Override
     public AccountDto.Update updateAccount(long id) {
+        return null;
+    }
+    @Override
+    public List<AccountDto.Response> getAccount(String keyword) {
         return null;
     }
 

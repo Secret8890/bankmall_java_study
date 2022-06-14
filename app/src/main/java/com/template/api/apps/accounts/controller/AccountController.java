@@ -1,15 +1,12 @@
 package com.template.api.apps.accounts.controller;
 
-import ch.qos.logback.core.CoreConstants;
-import com.template.api.apps.accounts.domain.Account;
 import com.template.api.apps.accounts.dto.AccountDto;
 import com.template.api.apps.accounts.service.AccountService;
 import com.template.api.utils.dtos.PagableDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.Update;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,10 +37,9 @@ public class AccountController {
     // todo : 회원변경 구현
 
     @ApiOperation(value = "회원정보 변경")
-    @PutMapping("/user/update")
-    public void UpdateAccount(AccountDto.Update update){
-       accountService.updateAccount(update);
-
+    @PutMapping
+    public void UpdateAccount(Long id, AccountDto.Update update) throws NotFoundException {
+        accountService.updateAccount(id, update);
     }
 
     @ApiOperation(value = "세번째야")

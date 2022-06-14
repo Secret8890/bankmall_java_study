@@ -3,6 +3,7 @@ package com.template.api.apps.accounts.dto;
 import com.template.api.apps.accounts.domain.Account;
 import com.template.api.utils.interfaces.BaseDtoMapper;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -15,6 +16,6 @@ public interface AccountDtoMapper extends BaseDtoMapper<Account, AccountDto.Resp
 
   Account create(AccountDto.Create create);
 
-  Account update(AccountDto.Update update);
+  void update(AccountDto.Update update,@MappingTarget Account account);
 }
 
