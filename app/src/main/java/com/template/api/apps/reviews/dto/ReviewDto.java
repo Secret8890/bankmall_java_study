@@ -10,6 +10,7 @@ public class ReviewDto {
     @Getter
     @Setter
     public static class Create {
+        private Long createdById;
         private String title;
         private String content;
     }
