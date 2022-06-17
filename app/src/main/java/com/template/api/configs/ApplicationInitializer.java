@@ -1,7 +1,5 @@
 package com.template.api.configs;
 
-import com.template.api.apps.accounts.domain.Account;
-import com.template.api.apps.accounts.domain.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +15,6 @@ public class ApplicationInitializer implements ApplicationRunner {
 
   private final PasswordEncoder passwordEncoder;
 
-  private final AccountRepository accountRepository;
 
   @Value("${app.default_admin.username}")
   private String username;
@@ -28,23 +25,6 @@ public class ApplicationInitializer implements ApplicationRunner {
   @Override
   public void run(ApplicationArguments args) {
     log.info("Application startup complete.");
-
-    try {
-      if (username != null && !username.isEmpty()
-          && accountRepository.countByUserId(username) <= 0) {
-        Account user = new Account();
-        //users.setType(AccountType.ADMIN);
-        user.setUserId(username);
-        user.setName(username);
-        user.setPassword(passwordEncoder.encode(password));
-
-        accountRepository.save(user);
-      }
-
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
-
 //    passwordEncoder.encode(password);
 
   }

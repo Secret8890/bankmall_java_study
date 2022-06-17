@@ -1,7 +1,5 @@
 package com.template.api.utils.interfaces;
 
-import com.template.api.apps.accounts.domain.Account;
-import com.template.api.apps.accounts.dto.AccountDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 

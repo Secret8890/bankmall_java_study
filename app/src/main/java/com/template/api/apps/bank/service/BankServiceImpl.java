@@ -1,10 +1,10 @@
-package com.template.api.apps.Bank.service;
+package com.template.api.apps.bank.service;
 
 
-import com.template.api.apps.Bank.domain.Bank;
-import com.template.api.apps.Bank.domain.BankRepository;
-import com.template.api.apps.Bank.dto.BankDto;
-import com.template.api.apps.Bank.dto.BankDtoMapper;
+import com.template.api.apps.bank.domain.Bank;
+import com.template.api.apps.bank.domain.BankRepository;
+import com.template.api.apps.bank.dto.BankDto;
+import com.template.api.apps.bank.dto.BankDtoMapper;
 import com.template.api.utils.dtos.PagableDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @Primary
 @Qualifier("BankServiceImpl")
+
 public class BankServiceImpl {
 
     private final BankRepository bankRepository;
@@ -33,12 +34,15 @@ public class BankServiceImpl {
         bankRepository.save(bank);
     }
 
-    public List<BankDto.Response>getBankNames(){
+    public List<BankDto.Response>getBanksName(){
         List<Bank> bank = bankRepository.findAll();
         List<BankDto.Response>responses = bank.stream().map(Bank::toResponse).collect(Collectors.toList());
         return responses;
     }
 
-
+    @Transactional
+    public void deleteBank(Long id){
+        bankRepository.deleteById(id);
+    }
 
 }

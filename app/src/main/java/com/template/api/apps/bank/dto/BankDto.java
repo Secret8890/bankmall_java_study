@@ -1,11 +1,10 @@
-package com.template.api.apps.Bank.dto;
+package com.template.api.apps.bank.dto;
 
 import com.template.api.utils.dtos.PagableDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
 
 public class BankDto {
 

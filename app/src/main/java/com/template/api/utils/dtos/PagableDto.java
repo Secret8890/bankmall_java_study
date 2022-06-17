@@ -1,6 +1,5 @@
 package com.template.api.utils.dtos;
 
-import com.template.api.apps.accounts.domain.Account;
 import com.template.api.jpa.base.DomainWithMapper;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

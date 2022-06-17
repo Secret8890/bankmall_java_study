@@ -1,10 +1,9 @@
-package com.template.api.apps.Bank.domain;
+package com.template.api.apps.bank.domain;
 
 
-import com.template.api.apps.Bank.dto.BankDto;
-import com.template.api.apps.Bank.dto.BankDtoMapper;
+import com.template.api.apps.bank.dto.BankDto;
+import com.template.api.apps.bank.dto.BankDtoMapper;
 import com.template.api.jpa.base.BaseDomainWithId;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
