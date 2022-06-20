@@ -54,7 +54,7 @@ public class BankDto {
         private Long maxReturnYear;
 
         @ApiModelProperty(value = "중도상환수수료")
-        private Double repaymentFees;
+        private String repaymentFees;
 
         @ApiModelProperty(value = "중도상환수수료 몇 년간")
         private String repaymentApplyyear;
@@ -95,7 +95,7 @@ public class BankDto {
         @ApiModelProperty(value = "가산 금리")
         private Double addRate;
 
-        @ApiModelProperty(value = "할인 항목목")
+        @ApiModelProperty(value = "할인 항목")
        private String rateBySpeical;
 
         @ApiModelProperty(value = "할인 금리")
@@ -114,7 +114,7 @@ public class BankDto {
         private Long maxReturnYear;
 
         @ApiModelProperty(value = "중도상환수수료")
-        private Double repaymentFees;
+        private String repaymentFees;
 
         @ApiModelProperty(value = "중도상환수수료 몇 년간")
         private String repaymentApplyyear;

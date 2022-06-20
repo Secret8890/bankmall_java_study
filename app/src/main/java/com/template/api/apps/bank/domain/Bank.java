@@ -17,7 +17,7 @@ public class Bank extends BaseDomainWithId {
     private String bankId;
     private String bankName;
     private String financeType;
-    private  String loanType;
+    private String loanType;
     private Double baseRate;
     private Double addRate;
     private String rateBySpeical;
@@ -26,7 +26,7 @@ public class Bank extends BaseDomainWithId {
     private Long returnYear;
     private Long minReturnYear;
     private Long maxReturnYear;
-    private Double repaymentFees;
+    private String repaymentFees;
     private String repaymentApplyyear;
     private String repaymentExemption;
     private String returnMethod;
