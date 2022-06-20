@@ -1,13 +1,11 @@
 package com.template.api.utils.dtos;
 
-import com.template.api.apps.accounts.domain.Account;
 import com.template.api.jpa.base.DomainWithMapper;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bouncycastle.jce.provider.JCEBlockCipher;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
