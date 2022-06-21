@@ -4,6 +4,7 @@ buildscript {
     }
 }
 
+
 plugins {
     id 'org.springframework.boot' version '2.5.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -49,10 +50,12 @@ dependencies {
 
     implementation 'javax.mail:mail:1.4.7'
     implementation 'javax.xml.bind:jaxb-api'
-    implementation 'mysql:mysql-connector-java:8.0.23'
+//    implementation 'mysql:mysql-connector-java:8.0.23'
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'net.sf.json-lib:json-lib:2.4:jdk15'
+
+    implementation 'org.postgresql:postgresql:42.3.3'
 
     implementation 'org.hashids:hashids:1.0.3'
 

@@ -8,12 +8,14 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface BankDtoMapper extends BaseDtoMapper <Bank , BankDto.Response, BankDto.Create> {
+public interface BankDtoMapper extends BaseDtoMapper<Bank , BankDto.Response, BankDto.Create> {
 
    BankDtoMapper INSTANCE = Mappers.getMapper(BankDtoMapper.class);
 
    List<BankDto.Response> toResponses(List<Bank> banks);
 
    Bank create(BankDto.Create create);
+
+   Bank calRate(BankDto.Response response);
 
 }

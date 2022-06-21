@@ -26,14 +26,75 @@ public class BankService {
 
     @Transactional
 
-    public void createBank(BankDto.Create create){
-        if(create.getBankName() == null ){
-            throw new NullPointerException("금융사명을 입력해주세요 ..");
-        } else {
+
+    public void createBank (BankDto.Create create) throws NullPointerException {
+        if(create == null){
+            throw new NullPointerException("정확한값을 입력해주세요 ..");
+
+//        if (create.getBankName()==null){
+//        throw new NullPointerException();
+
+//        else if(create.getBankName()==null){
+//            throw new NullPointerException("금융사명을 입력해주세요");
+//        } else if(create.getFinanceType()==null){
+//            throw new NullPointerException("금융권을 체크해주세요");
+//        } else if (create.getBaseRate()<0){
+//            throw new NullPointerException("올바른 값을 입력해주세요");
+        }
+        else {
+            create.setRate(create.getBaseRate()+ create.getAddRate()-create.getRateByUseMethodMax());
+
             Bank bank = BankDtoMapper.INSTANCE.create(create);
+
             bankRepository.save(bank);
         }
+
+//        if (create.getBaseRate() >= 0){
+//            create.setRate(create.getBaseRate()+ create.getAddRate()-create.getRateByUseMethodMax());
+//
+//            Bank bank = BankDtoMapper.INSTANCE.create(create);
+//            bankRepository.save(bank);
+//
+//        }else {
+//            throw new NullPointerException("값을 정확히 입력하세요...");
+//        }
     }
+
+//    @Transactional
+//
+//    public void responseBank(BankDto.Response response){
+//        if(response.getBaseRate() >= 0 ){
+//            response.setRate(response.getBaseRate()+ response.getAddRate()-response.getRateByUseMethodMax());
+//            Bank bank = BankDtoMapper.INSTANCE.calRate(response);
+//            bankRepository.save(bank);
+//        } else {
+//            throw new NullPointerException("값을 정확히 입력하세요");
+//        }
+//        if(response.getLoanMoney()>=0) {
+//            response.setReturnMoney((long) ((response.getLoanMoney() * response.getRate() / 12) + (response.getLoanMoney() / (response.getReturnYear()) * 12)));
+//        }else {
+//            throw new NullPointerException("값을 정확히 입력하세요...");
+//        }
+//    }
+
+    @Transactional
+    public BankDto.Update bankAccount(long id, BankDto.Update update) {
+
+        return null;
+    }
+//    @Transactional
+//    public void calRate(BankDto.Response response){
+//        if(response.getRate()<0){
+//            throw new NullPointerException("정확한 값을 입력해주세요");
+//        } else{
+//            Bank bank = BankDtoMapper.INSTANCE.calRate(response);
+//
+//            bankRepository.save(bank);
+//        }
+//
+//    }
+
+
     @Transactional
 
     public PagableDto.Response<BankDto.Response> getPageBanks(BankDto.Request request) {
