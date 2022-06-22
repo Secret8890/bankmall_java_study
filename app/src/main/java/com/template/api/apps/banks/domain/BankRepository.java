@@ -9,4 +9,7 @@ import java.util.Optional;
 public interface BankRepository extends BaseRepository<Bank> {
 
     Optional<Bank> findByid(String id);
+
+//    Optional<Sales> findById(List<Sales> list);
+
 }

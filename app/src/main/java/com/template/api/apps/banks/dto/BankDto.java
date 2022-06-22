@@ -1,5 +1,7 @@
 package com.template.api.apps.banks.dto;
 
+import com.google.common.collect.Lists;
+import com.template.api.apps.banks.domain.Sales;
 import com.template.api.utils.dtos.PagableDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.util.List;
 
 
 @Data
@@ -97,7 +100,6 @@ public class BankDto {
         @ApiModelProperty(value = "상환금액")
         private Long returnMoney;
 
-
     }
     @Getter
     @Setter
@@ -119,23 +121,17 @@ public class BankDto {
 
         @Column (name = "addRate")
         @ApiModelProperty(value = "가산금리")
-        private double addRate;
+        private Double addRate;
 
-        @Column (name = "rateBySpeical")
-        @ApiModelProperty(value = "할인항목")
-        private String rateBySpeical;
 
         @Column (name = "rate")
         @ApiModelProperty(value = "대출금리")
-        private double rate;
+        private Double rate;
 
         @Column (name = "baseRate")
         @ApiModelProperty(value = "기준금리")
-        private double baseRate;
+        private Double baseRate;
 
-        @Column (name = "rateByUseMethodMax")
-        @ApiModelProperty(value = "할인금리")
-        private double rateByUseMethodMax;
 
         @Column (name = "returnYear")
         @ApiModelProperty(value = "대출기간")
@@ -151,7 +147,7 @@ public class BankDto {
 
         @Column (name = "repaymentFees")
         @ApiModelProperty(value = "중도상환수수료율")
-        private double repaymentFees;
+        private Double repaymentFees;
 
         @Column (name = "repaymentFeesYear")
         @ApiModelProperty(value = " 중도상환수수료 몇년간 ")
@@ -187,9 +183,6 @@ public class BankDto {
         @ApiModelProperty(value = "가산금리")
         private double addRate;
 
-        @Column (name = "rateBySpeical")
-        @ApiModelProperty(value = "할인항목")
-        private String rateBySpeical;
 
         @Column (name = "rate")
         @ApiModelProperty(value = "대출금리")
@@ -199,9 +192,8 @@ public class BankDto {
         @ApiModelProperty(value = "기준금리")
         private double baseRate;
 
-        @Column (name = "rateByUseMethodMax")
-        @ApiModelProperty(value = "할인금리")
-        private double rateByUseMethodMax;
+        @ApiModelProperty(value = "할인금리리스트")
+        private List<SaleCreate> sales = Lists.newArrayList();
 
         @Column (name = "returnYear")
         @ApiModelProperty(value = "대출기간")
@@ -217,7 +209,7 @@ public class BankDto {
 
         @Column (name = "repaymentFees")
         @ApiModelProperty(value = "중도상환수수료율")
-        private double repaymentFees;
+        private Double repaymentFees;
 
         @Column (name = "repaymentFeesYear")
         @ApiModelProperty(value = " 중도상환수수료 몇년간 ")
@@ -231,5 +223,24 @@ public class BankDto {
         @ApiModelProperty(value = " 상환방식 ")
         private String returnMethod;
 
+    }
+
+    @Getter
+    @Setter
+    @ApiModel("SaleDto")
+    public static class SaleCreate {
+        @ApiModelProperty(value = "할인항목")
+        private String rateBySpeical;
+
+        @ApiModelProperty(value = "할인금리")
+        private Double rateByUseMethodMax;
+    }
+    @Getter
+    @Setter
+    @ApiModel("SaleListDto")
+    public static class SaleResponse {
+
+        @ApiModelProperty(value = "할인금리리스트")
+        private List<Sales> salesList = Lists.newArrayList();
     }
 }

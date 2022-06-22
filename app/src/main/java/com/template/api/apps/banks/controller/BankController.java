@@ -30,10 +30,22 @@ public class BankController {
 
     @ApiOperation(value = " 금융사 등록 ")
     @PostMapping
-    public void createBank( BankDto.Create create) throws NotFoundException{
-
+//    public void createBank(@RequestBody BankDto.Create create) throws NotFoundException{
+        public void createBank(BankDto.Create create) throws NotFoundException{
         bankService.createBank(create);
+
     }
+    @ApiOperation(value =" 할인금리 리스트 등록")
+    @PostMapping ("/list")
+    public void createList (BankDto.SaleCreate salecreate) throws NotFoundException {
+        bankService.createList(salecreate);
+    }
+
+//    @ApiOperation(value = "할인금리 리스트")
+//    @GetMapping("/list/view")
+//    public PagableDto.Response<BankDto.SaleResponse> getLists(BankDto.Request request){
+//
+//    }
 
 }
 

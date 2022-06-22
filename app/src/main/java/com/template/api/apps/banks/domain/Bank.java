@@ -8,13 +8,15 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Data
+
 @Table(name = "Banks")
 
 public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.Response> {
@@ -29,13 +31,8 @@ public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.R
 
     private Double addRate; // 가산금리
 
-//    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
-//
-//    private List<Sales> salesList = new java.util.ArrayList<>();
-
-    private String rateBySpeical; // 할인항목
-
-    private Double rateByUseMethodMax; // 할인금리
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Sales> salesList = new ArrayList<Sales>();
 
     private Double rate; // 최종금리
 
