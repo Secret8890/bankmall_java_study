@@ -17,6 +17,8 @@ import java.util.List;
 @Table(name = "Banks")
 
 public class BankDto {
+
+
     @Getter
     @Setter
     @ApiModel("BankDto_Request")
@@ -30,6 +32,9 @@ public class BankDto {
     @ApiModel("BankDto_Response")
 
     public static class Response{
+
+        @ApiModelProperty(value = "고유번호")
+        private Long id;
 
         @ApiModelProperty(value = "금융권")
         private String financeType;
@@ -52,8 +57,8 @@ public class BankDto {
         @ApiModelProperty(value = "기준금리")
         private Double baseRate;
 
-        @ApiModelProperty(value = "할인금리")
-        private Double discountRate;
+//        @ApiModelProperty(value = "할인금리")
+//        private Double discountRate;
 
         @ApiModelProperty(value = "대출기간")
         private Long returnYear;
@@ -90,8 +95,10 @@ public class BankDto {
         @ApiModelProperty(value = "상환금액")
         private Long returnMoney;
 
+
         @ApiModelProperty(value = "할인금리리스트")
-        private List<SaleResponse> discountRows = Lists.newArrayList();
+        private List<Sales> discountrows = Lists.newArrayList();
+
     }
     @Getter
     @Setter
@@ -137,6 +144,9 @@ public class BankDto {
         @ApiModelProperty(value = " 상환방식 ")
         private String returnMethod;
 
+//        @ApiModelProperty(value = " 할인 ")
+//        private Double discountrate;
+
         @ApiModelProperty(value = "할인금리리스트")
         private List<SaleCreate> discountRows = Lists.newArrayList();
 
@@ -146,87 +156,53 @@ public class BankDto {
     @Setter
     @ApiModel("BankDto_Update")
     public static class Update {
-
         @ApiModelProperty(value = "금융권")
         private String financeType;
 
-        @ApiModelProperty(value = "금융권 바꿀내용")
-        private String upfinanceType;
 
         @ApiModelProperty(value = "금융사명")
         private String bankName;
 
-        @ApiModelProperty(value = "금융사명 바꿀내용")
-        private String upbankName;
-
         @ApiModelProperty(value = "금리형태 ")
         private String loanType;
-
-        @ApiModelProperty(value = "금리형태 바꿀내용")
-        private String uploanType;
 
         @ApiModelProperty(value = "가산금리")
         private Double addRate;
 
-        @ApiModelProperty(value = "가산금리 바꿀내용")
-        private Double upaddRate;
-
         @ApiModelProperty(value = "대출금리")
         private Double rate;
-
-        @ApiModelProperty(value = "대출금리 바꿀내용")
-        private Double uprate;
 
         @ApiModelProperty(value = "기준금리")
         private Double baseRate;
 
-        @ApiModelProperty(value = "기준금리 바꿀내용")
-        private Double upbaseRate;
-
-//        @ApiModelProperty(value = "할인금리리스트")
-//        private List<SaleResponse> discountRows = Lists.newArrayList();
+        @ApiModelProperty(value = "할인금리리스트")
+        private List<SaleResponse> discountRows = Lists.newArrayList();
 
         @ApiModelProperty(value = "대출기간")
         private Long returnYear;
 
-        @ApiModelProperty(value = "대출기간 바꿀내용")
-        private Long upreturnYear;
 
         @ApiModelProperty(value = " 최소대출기간 ")
         private Long minReturnYear;
 
-        @ApiModelProperty(value = " 최소대출기간 바꿀내용")
-        private Long upminReturnYear;
 
         @ApiModelProperty(value = "최대대출기간")
         private Long maxReturnYear;
 
-        @ApiModelProperty(value = "최대대출기간 바꿀내용")
-        private Long upmaxReturnYear;
 
         @ApiModelProperty(value = "중도상환수수료율")
         private Double repaymentFees;
 
-        @ApiModelProperty(value = "중도상환수수료율 바꿀내용")
-        private Double uprepaymentFees;
-
         @ApiModelProperty(value = " 중도상환수수료 몇년간 ")
         private String repaymentFeesYear;
 
-        @ApiModelProperty(value = " 중도상환수수료 몇년간 바꿀내용 ")
-        private String uprepaymentFeesYear;
 
         @ApiModelProperty(value = " 중도상환수수료 면제 ")
         private String repaymentExemption;
 
-        @ApiModelProperty(value = " 중도상환수수료 면제 바꿀내용")
-        private String uprepaymentExemption;
 
-        @ApiModelProperty(value = " 상환방식 ")
-        private String returnMethod;
-
-        @ApiModelProperty(value = " 상환방식 바꿀내용")
-        private String upreturnMethod;
+//        @ApiModelProperty(value = " 상환방식 ")
+//        private String returnMethod;
 
     }
 
@@ -234,13 +210,66 @@ public class BankDto {
     @Getter
     @Setter
     @ApiModel("SaleDto")
-    @Table(name = "Sales")
+    @Table(name = "discountRows")
     public static class SaleCreate {
+
         @ApiModelProperty(value = "할인항목")
         private String discountCondition;
 
         @ApiModelProperty(value = "할인금리")
         private Double discountRate;
+
+    }
+    @Getter
+    @Setter
+    @ApiModel("BankDto_Detail")
+    public static class Detail{
+
+        @ApiModelProperty(value = "금융권")
+        private String financeType;
+
+        @ApiModelProperty(value = "금융사명")
+        private String bankName;
+
+        @ApiModelProperty(value = "금리형태 ")
+        private String loanType;
+
+        @ApiModelProperty(value = "가산금리")
+        private Double addRate;
+
+        @ApiModelProperty(value = "대출금리")
+        private Double rate;
+
+        @ApiModelProperty(value = "기준금리")
+        private Double baseRate;
+
+        @ApiModelProperty(value = "대출기간")
+        private Long returnYear;
+
+        @ApiModelProperty(value = " 최소대출기간 ")
+        private Long minReturnYear;
+
+        @ApiModelProperty(value = "최대대출기간")
+        private Long maxReturnYear;
+
+        @ApiModelProperty(value = "중도상환수수료율")
+        private Double repaymentFees;
+
+        @ApiModelProperty(value = " 중도상환수수료 몇년간 ")
+        private String repaymentFeesYear;
+
+        @ApiModelProperty(value = " 중도상환수수료 면제 ")
+        private String repaymentExemption;
+
+        @ApiModelProperty(value = " 상환방식 ")
+        private String returnMethod;
+
+        @ApiModelProperty(value = " 할인 ")
+        private Double discountrate;
+
+        @ApiModelProperty(value = "할인금리리스트")
+        private List<SaleCreate> discountRows = Lists.newArrayList();
+
     }
     @Getter
     @Setter
@@ -249,5 +278,14 @@ public class BankDto {
 
         @ApiModelProperty(value = "할인금리리스트")
         private List<Sales> discountRows = Lists.newArrayList();
+
+        }
+        @Getter
+        @Setter
+        @ApiModel("BankDeleteDto")
+        public static class delete {
+            @ApiModelProperty(value = "금융사 삭제")
+            private Long id;
+        }
     }
-}
+

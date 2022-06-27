@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v2/banklists")
 @Secured({"ID_USER"})
-
 public class BankController {
 
     private final BankService bankService;
@@ -30,16 +29,14 @@ public class BankController {
 
     @ApiOperation(value = " 금융사 등록 ")
     @PostMapping
-//    public void createBank(@RequestBody BankDto.Create create) throws NotFoundException{
-        public void createBank(@RequestBody BankDto.Create create) throws NotFoundException{
+    public void createBank(@RequestBody BankDto.Create create) throws NotFoundException{
         bankService.createBank(create);
-
     }
-    @ApiOperation(value =" 할인금리 리스트 등록")
-    @PostMapping ("/list")
-    public void createList (BankDto.SaleCreate salecreate) throws NotFoundException {
-        bankService.createList(salecreate);
-    }
+//    @ApiOperation(value =" 할인금리 리스트 등록")
+//    @PostMapping ("/list")
+//    public void createList (BankDto.SaleCreate salecreate) throws NotFoundException {
+//        bankService.creatdiscountrows(salecreate);
+//    }
 
     @ApiOperation(value = "할인금리 리스트")
     @GetMapping("/list/view")
@@ -47,19 +44,48 @@ public class BankController {
         return bankService.getPageLists(response);
     }
 
+
     @ApiOperation(value = "금융사 내용 수정")
-    @PutMapping
-    public void UpdateBank(Long id, BankDto.Update update) throws javassist.NotFoundException {
-        bankService.updateBank(id, update);
+    @PutMapping("/{id}")
+    public void Update(@PathVariable Long id ,@RequestBody BankDto.Update update)
+    {bankService.update(id,update);
     }
     @ApiOperation(value = "정보 삭제")
     @DeleteMapping
-    public void deleteBank(Long id) throws javassist.NotFoundException {
-        if(id != null) {
-            bankService.deleteBank(id);
+    public void deleteBank(Long id) throws NotFoundException {
+        if (id == null) {
+            throw new NotFoundException("올바른 아이디를 입력하세요");
         } else {
-            throw new javassist.NotFoundException("잘못된 아이디 번호.");
+            bankService.deleteBank(id);
         }
     }
+
+
+
+//    @PutMapping("/id")
+//    public ResponseEntity<Boolean> update( Bank update, @PathVariable Long id){
+//        return ResponseEntity.ok(bankService.update(update.newbanklist(), id));
+//    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "상세조회")
+    public BankDto.Response detail(@PathVariable Long id){
+        return bankService.detail(id);
+    }
+
+//    @ApiOperation(value = "상세조회")
+//    @GetMapping("/search")
+//    @ModelAttribute
+//    public void Search (String keyword , Model model) throws Exception {
+//        List<Bank> bankList = BankService.search(keyword);
+//        model.addAttribute("BankList",BankService.searchList(keyword));
+//
+//    }
+
+//    public ResponseEntity deleteBank(@PathVariable Long id) throws NotFoundException {
+//
+//            bankService.deleteBank(id);
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
 }
 

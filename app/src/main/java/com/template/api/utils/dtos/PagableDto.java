@@ -39,7 +39,7 @@ public class PagableDto {
         private int page = 0;
 
         @ApiModelProperty(value = "페이지 당 수", example = "20", required = false, position = 2)
-        private int limit = 20;
+        private int limit = 100;
 
         @ApiModelProperty(value = "정렬필드", example = "createdAt", required = false, position = 3)
         private String sort;
@@ -69,6 +69,9 @@ public class PagableDto {
         @ApiModelProperty(value = "페이지 번호")
         private int pageNum;
 
+//        @ApiModelProperty(value = "아이디 조회")
+//        private Long id;
+
         private List<T> dataList;
 
         public static ModelMapper mapper;
@@ -89,6 +92,7 @@ public class PagableDto {
                             .stream()
                             .map(v -> v.toResponse())
                             .collect(Collectors.toList())
+
             );
 
             return result;
