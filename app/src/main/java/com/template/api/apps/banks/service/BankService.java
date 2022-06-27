@@ -8,6 +8,7 @@ import com.template.api.apps.banks.dto.BankDto;
 import com.template.api.apps.banks.dto.BankDtoMapper;
 import com.template.api.jpa.Restrictions;
 import com.template.api.utils.dtos.PagableDto;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.domain.Page;
@@ -24,6 +25,29 @@ import java.util.List;
 
 public class BankService {
     private final BankRepository bankRepository ;
+
+
+    @Transactional
+    public void updateBank(Long id, BankDto.Update update) throws NotFoundException {
+        Bank bank = bankRepository.findById(id).orElse(null);
+        if(bank != null) {
+            bank.setBankName(update.getBankName());
+            bank.setFinanceType(update.getFinanceType());
+            bank.setLoanType(update.getLoanType());
+        } else {
+            throw new NotFoundException(" 해당 정보가 없습니다 ");
+        }
+
+    }
+
+    public BankDto.Update updateBank(long id) {
+        return null;
+    }
+
+    @Transactional
+    public void deleteBank(Long id) {
+        bankRepository.deleteById(id);
+    }
 
     @Transactional
     public void createBank (BankDto.Create create) throws NullPointerException {
@@ -48,6 +72,7 @@ public class BankService {
         }
 
     }
+
         @Transactional
         public void createList(BankDto.SaleCreate salecreate) throws NullPointerException {
             if (salecreate == null) {
@@ -76,15 +101,19 @@ public class BankService {
 //            List<BankDto.SaleResponse> sales = BankDtoMapper.INSTANCE.toResponse(saleresponse);
 //        }
 
+
     @Transactional
 
     public void responseBank(BankDto.Response response){
         if(response.getBaseRate() >= 0 ){
-            response.setRate(response.getBaseRate()+ response.getAddRate()-response.getRateByUseMethodMax());
+            response.setRate(response.getBaseRate()+ response.getAddRate()-response.getDiscountRate());
             Bank bank = BankDtoMapper.INSTANCE.calRate(response);
+
+
         } else {
             throw new NullPointerException("값을 정확히 입력하세요");
         }
+
         if(response.getLoanMoney()>=0) {
             response.setReturnMoney((long) ((response.getLoanMoney() * response.getRate() / 12) + (response.getLoanMoney() / (response.getReturnYear()) * 12)));
         }else {
@@ -93,21 +122,30 @@ public class BankService {
     }
 
     @Transactional
+    public void Boolean (BankDto.Response response){
+        if (response.getDiscountRows().equals(true)){
+            response.setRate((response.getRate())-response.getDiscountRate());
+        }
+
+    }
+
+    @Transactional
     public BankDto.Update bankAccount(long id, BankDto.Update update) {
 
         return null;
     }
 
-    @Transactional
-    public void calRate(BankDto.Response response){
-        if(response.getRate()<0){
-            throw new NullPointerException("정확한 값을 입력해주세요");
-        } else{
-            Bank bank = BankDtoMapper.INSTANCE.calRate(response);
+//    @Transactional
+//    public void calRate(BankDto.Response response){
+//        if(response.getRate()<0){
+//            throw new NullPointerException("정확한 값을 입력해주세요");
+//        } else{
+//            Bank bank = BankDtoMapper.INSTANCE.calRate(response);
+//
+//        }
+//
+//    }
 
-        }
-
-    }
 
 
     @Transactional
@@ -134,8 +172,34 @@ public class BankService {
         return pages;
     }
 
+    @Transactional
+
+    public PagableDto.Response<BankDto.SaleResponse> getPageLists(BankDto.Request request) {
+
+
+        Sort sort = Sort.by(Sort.Order.desc("createdAt"));
+        if (StringUtils.isNotBlank(request.getSort())) {
+            sort = Sort.by(request.getOrder().dir, request.getSort());
+        }
+
+        Restrictions r = new Restrictions();
+        r.eq("isActive", true);
+
+        PageRequest pageRequest = PageRequest.of(request.getPage(), request.getLimit(), sort);
+
+        Page<Bank> items = bankRepository.findAll(r.output(), pageRequest); //Page DATA GET
+
+        PagableDto.Response<BankDto.SaleResponse> pages = PagableDto.Response.of(items); //Page response mapping
+
+        //endregion
+
+        return pages;
+    }
+
+
     public List<BankDto.Response> getBanks(BankDto.Request request) {
         return null;
     }
+
 
 }

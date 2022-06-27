@@ -9,4 +9,5 @@ public interface BaseDtoMapper<E, R, C , D> {
     E create(C dto);
 
     D create(A dto);
+
 }

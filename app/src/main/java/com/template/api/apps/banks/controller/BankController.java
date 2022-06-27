@@ -31,7 +31,7 @@ public class BankController {
     @ApiOperation(value = " 금융사 등록 ")
     @PostMapping
 //    public void createBank(@RequestBody BankDto.Create create) throws NotFoundException{
-        public void createBank(BankDto.Create create) throws NotFoundException{
+        public void createBank(@RequestBody BankDto.Create create) throws NotFoundException{
         bankService.createBank(create);
 
     }
@@ -41,11 +41,25 @@ public class BankController {
         bankService.createList(salecreate);
     }
 
-//    @ApiOperation(value = "할인금리 리스트")
-//    @GetMapping("/list/view")
-//    public PagableDto.Response<BankDto.SaleResponse> getLists(BankDto.Request request){
-//
-//    }
+    @ApiOperation(value = "할인금리 리스트")
+    @GetMapping("/list/view")
+    public PagableDto.Response<BankDto.SaleResponse> getLists(BankDto.Request response){
+        return bankService.getPageLists(response);
+    }
 
+    @ApiOperation(value = "금융사 내용 수정")
+    @PutMapping
+    public void UpdateBank(Long id, BankDto.Update update) throws javassist.NotFoundException {
+        bankService.updateBank(id, update);
+    }
+    @ApiOperation(value = "정보 삭제")
+    @DeleteMapping
+    public void deleteBank(Long id) throws javassist.NotFoundException {
+        if(id != null) {
+            bankService.deleteBank(id);
+        } else {
+            throw new javassist.NotFoundException("잘못된 아이디 번호.");
+        }
+    }
 }
 

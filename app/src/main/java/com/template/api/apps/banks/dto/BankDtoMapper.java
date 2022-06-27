@@ -21,5 +21,14 @@ public interface BankDtoMapper extends BaseDtoMapper<Bank , BankDto.Response, Ba
 
    Sales create(BankDto.SaleCreate salecreate);
 
+   Bank update(BankDto.Update update);
+//   void update(@MappingTarget long id, BankDto.Update update) ;
+//
+//   void updateBank(Long id,BankDto.Update update);
+//
+//   BankDto.Update updateBank(long id);
+
+//   void deleteBankList(long id);
+
 //   List<BankDto.SaleResponse> toResponse(BankDto.SaleResponse saleResponse);
 }
