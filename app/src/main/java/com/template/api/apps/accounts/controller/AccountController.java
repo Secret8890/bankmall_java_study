@@ -28,7 +28,6 @@ public class AccountController {
 
 
     // todo : 회원가입 구현
-
     @ApiOperation(value = "회원가입")
     @PostMapping
     public void createAccount(AccountDto.Create create) {
@@ -37,7 +36,6 @@ public class AccountController {
     }
 
     // todo : 회원변경 구현
-
     @ApiOperation(value = "회원정보 변경")
     @PutMapping
     public void UpdateAccount(Long id, AccountDto.Update update) throws NotFoundException {
