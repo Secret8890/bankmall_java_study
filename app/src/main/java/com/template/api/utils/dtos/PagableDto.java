@@ -1,6 +1,5 @@
 package com.template.api.utils.dtos;
 
-import com.template.api.apps.accounts.domain.Account;
 import com.template.api.jpa.base.DomainWithMapper;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -25,15 +24,15 @@ public class PagableDto {
         ASC(Sort.Direction.ASC),
         DESC(Sort.Direction.DESC);
 
-        public final Sort.Direction dir;
+    public final Sort.Direction dir;
 
-        OrderType(Sort.Direction dir) {
-            this.dir = dir;
-        }
-
+    OrderType(Sort.Direction dir) {
+        this.dir = dir;
     }
 
-    @Data
+}
+
+@Data
     public static class Request {
 
         @ApiModelProperty(value = "페이지", example = "0", required = false, position = 1)

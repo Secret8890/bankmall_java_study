@@ -1,7 +1,7 @@
 package com.template.api.configs.security;
 
 import com.template.api.configs.property.AppProperties;
-import com.template.api.apps.accounts.service.UserDetailsServiceImpl;
+//import com.template.api.apps.reviews.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -30,14 +29,14 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
   private final PasswordEncoder passwordEncoder;
   private final AuthenticationManager authenticationManager;
   private final AppProperties appProperties;
-  private final UserDetailsServiceImpl userDetailsService;
+//  private final UserDetailsServiceImpl userDetailsService;
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
     endpoints
         .tokenStore(tokenStore())
         .accessTokenConverter(accessTokenConverter())
-        .userDetailsService(userDetailsService)
+//        .userDetailsService(userDetailsService)
         .authenticationManager(authenticationManager)
     ;
   }
@@ -68,7 +67,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
   @Bean
   public JwtAccessTokenConverter accessTokenConverter() {
     CUserAuthConverter userTokenConverter = new CUserAuthConverter();
-    userTokenConverter.setUserDetailsService(userDetailsService);
+//    userTokenConverter.setUserDetailsService(userDetailsService);
 
     DefaultAccessTokenConverter accessTokenConverter = new DefaultAccessTokenConverter();
     accessTokenConverter.setUserTokenConverter(userTokenConverter);
