@@ -20,10 +20,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional (readOnly = true)
-
 public class LoanService {
 
-    @Autowired
     private final LoanRepository loanRepository;
 
     // 모든 상품 조회
@@ -34,6 +32,7 @@ public class LoanService {
     //id 값을 입력하면 조회
     public Loan show (Long id) {return loanRepository.findById(id).orElse(null); }
 
+    @Transactional
     public Loan create(LoanDto dto) {
         Loan loan = dto.toEntity();
         if (loan.getId() != null) {

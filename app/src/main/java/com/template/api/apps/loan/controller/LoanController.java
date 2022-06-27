@@ -36,8 +36,6 @@ public class LoanController {
     @PostMapping
     public ResponseEntity<Loan> create(@RequestBody LoanDto dto) {
         Loan created = loanService.create(dto);
-        return (created != null) ?
-                ResponseEntity.status(HttpStatus.OK).body(created):
-                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return created != null ? ResponseEntity.status(HttpStatus.OK).body(created) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
