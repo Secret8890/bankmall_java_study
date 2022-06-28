@@ -1,6 +1,9 @@
 package com.template.api.apps.loan.domain;
 
 import com.google.common.collect.Lists;
+import com.template.api.apps.loan.dto.LoanDto;
+import com.template.api.jpa.base.BaseDomainWithId;
+import com.template.api.jpa.base.DomainWithMapper;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -22,30 +25,32 @@ public class Loan {
     private String financeType;
     @Column
     private String bankName;
-//    @Column
-//    private String loanType;
-//    @Column
-//    private double baseRate;
-//    @Column
-//    private double addRate;
-//    @Column
-//    private String rateBySpecial;
-//
+    @Column
+    private String loanType;
+    @Column
+    private double baseRate;
+    @Column
+    private double addRate;
+    @Column
+    private String rateBySpecial;
+
 ////        private List<SalesDto> salesList = Lists.newArrayList();
-//    @Column
-//    private double rate;
-//    @Column
-//    private long returnYear;
-//    @Column
-//    private long minReturnYear;
-//    @Column
-//    private long maxReturnYear;
-//    @Column
-//    private double repaymentFees;
-//    @Column
-//    private String returnMethod;
-//    @Column
-//    private double repaymentFeesYear;
+    @Column
+    private double rate;
+    @Column
+    private long returnYear;
+    @Column
+    private long minReturnYear;
+    @Column
+    private long maxReturnYear;
+    @Column
+    private double repaymentFees;
+    @Column
+    private String returnMethod;
+    @Column
+    private double repaymentFeesYear;
+
+
 
     public void put(Loan loan) {
         if (loan.bankName != null) {

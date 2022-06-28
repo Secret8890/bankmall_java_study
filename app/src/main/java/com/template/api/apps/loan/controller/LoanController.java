@@ -32,10 +32,32 @@ public class LoanController {
         return loanService.index();
     }
 
+//    @ApiOperation(value = "금융사명으로 조회")
+//    @GetMapping()
+//    public Loan search(@RequestParam(value = "keyword") String keyword) {
+//        List<LoanDto> loanDtoList = loanService
+//    }
+
     @ApiOperation(value = "대출상품 등록")
     @PostMapping
-    public ResponseEntity<Loan> create(@RequestBody LoanDto dto) {
+    public ResponseEntity<Loan> create(LoanDto dto) {
         Loan created = loanService.create(dto);
         return created != null ? ResponseEntity.status(HttpStatus.OK).body(created) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @ApiOperation(value = "대출상품 수정")
+    @PutMapping
+    public ResponseEntity<Loan> update(@PathVariable Long id, LoanDto dto) {
+        Loan updated = loanService.update(id, dto);
+        return (updated != null) ? ResponseEntity.status(HttpStatus.OK).body(updated):
+        ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @ApiOperation(value = "대출상품 삭제")
+    @DeleteMapping
+    public ResponseEntity<Loan> delete(Long id) {
+        Loan deleted = loanService.delete(id);
+        return (deleted != null) ? ResponseEntity.status(HttpStatus.OK).build() :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }

@@ -7,6 +7,7 @@ import com.template.api.apps.loan.dto.LoanDto;
 import com.template.api.jpa.Restrictions;
 import com.template.api.utils.dtos.PagableDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,9 +15,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional (readOnly = true)
@@ -30,7 +34,7 @@ public class LoanService {
     }
 
     //id 값을 입력하면 조회
-    public Loan show (Long id) {return loanRepository.findById(id).orElse(null); }
+    public Loan show (@PathVariable Long id) {return loanRepository.findById(id).orElse(null); }
 
     @Transactional
     public Loan create(LoanDto dto) {
@@ -41,19 +45,36 @@ public class LoanService {
         return loanRepository.save(loan);
     }
 
+    @Transactional
     public Loan update(Long id, LoanDto dto) {
+        // 1. DTO를 엔티티로 변환
         Loan loan = dto.toEntity();
-        // loan = dto에 담겨진 데이터를 엔티티로 변환
+        log.info(dto.toEntity().toString());
+        // 2. 타겟 조회
         Loan target = loanRepository.findById(id).orElse(null);
-        // target = loanRepository에서 id로 검색하고 없다면 null을 반환
-        if (target != null || id != loan.getId()) {
-            // 만약에 target이 null값이 아니거나 loan의 id값이 입력된 id값과 다르다면
+        log.info(target.toString());
+        // 3. 잘못된 요청 처리
+        if (target == null || id != loan.getId()) {
+            // 400 잘못된 요청 응답!
+            log.info("잘못된 요청! id: {}, article: {}", id, loan.toString());
             return null;
-            // null을 반환해라
         }
+        // 4. 업데이트
         target.put(loan);
         Loan updated = loanRepository.save(target);
         return updated;
     }
 
+    @Transactional
+    public Loan delete(Long id) {
+        // 대상 찾기
+        Loan target = loanRepository.findById(id).orElse(null);
+        // 잘못된 요청 처리
+        if (target == null) {
+            return null;
+        }
+        // 대상삭제
+        loanRepository.delete(target);
+        return target;
+    }
 }
