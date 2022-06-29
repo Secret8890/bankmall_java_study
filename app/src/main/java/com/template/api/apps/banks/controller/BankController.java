@@ -7,14 +7,13 @@ import com.template.api.utils.dtos.PagableDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = {" 금융사 관리 "})
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v2/banklists")
-@Secured({"ID_USER"})
+//@Secured({"ID_USER"})
 public class BankController {
 
     private final BankService bankService;
@@ -32,11 +31,6 @@ public class BankController {
     public void createBank(@RequestBody BankDto.Create create) throws NotFoundException{
         bankService.createBank(create);
     }
-//    @ApiOperation(value =" 할인금리 리스트 등록")
-//    @PostMapping ("/list")
-//    public void createList (BankDto.SaleCreate salecreate) throws NotFoundException {
-//        bankService.creatdiscountrows(salecreate);
-//    }
 
     @ApiOperation(value = "할인금리 리스트")
     @GetMapping("/list/view")
@@ -60,32 +54,11 @@ public class BankController {
         }
     }
 
-
-
-//    @PutMapping("/id")
-//    public ResponseEntity<Boolean> update( Bank update, @PathVariable Long id){
-//        return ResponseEntity.ok(bankService.update(update.newbanklist(), id));
-//    }
-
     @GetMapping("/{id}")
     @ApiOperation(value = "상세조회")
     public BankDto.Response detail(@PathVariable Long id){
         return bankService.detail(id);
     }
 
-//    @ApiOperation(value = "상세조회")
-//    @GetMapping("/search")
-//    @ModelAttribute
-//    public void Search (String keyword , Model model) throws Exception {
-//        List<Bank> bankList = BankService.search(keyword);
-//        model.addAttribute("BankList",BankService.searchList(keyword));
-//
-//    }
-
-//    public ResponseEntity deleteBank(@PathVariable Long id) throws NotFoundException {
-//
-//            bankService.deleteBank(id);
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
 }
 

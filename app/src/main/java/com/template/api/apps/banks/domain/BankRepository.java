@@ -9,10 +9,5 @@ public interface BankRepository extends BaseRepository<Bank> {
 
     Optional<Bank> findByid(String id);
 
-//    Long countByid(Long id);
-//    @Query(value = "select * FROM banks WHERE Bank_name LIKE %:keyword%"
-//    )
-//    List<Bank> findAll(String keyword);
-
 
 }

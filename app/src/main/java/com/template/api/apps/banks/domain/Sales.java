@@ -9,14 +9,11 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 
 @Entity
 @Getter
 @Setter
-@Table(name = "discountrows")
-
 public class Sales extends BaseDomainWithId {
     @ManyToOne(fetch = FetchType.LAZY)
     private Bank bank;
@@ -28,10 +25,5 @@ public class Sales extends BaseDomainWithId {
     public BankDto.SaleResponse toResponse() {
         return BankDtoMapper.INSTANCE.toResponse(this);
     }
-//    public void Sales(String discountCondition, Double discountRate){
-//        this.discountCondition = discountCondition;
-//        this.discountRate = discountRate;
-//    }
-//    @Override
-//
+
 }
