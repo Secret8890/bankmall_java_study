@@ -3,16 +3,12 @@ package com.template.api.apps.loan.controller;
 import com.template.api.apps.loan.domain.Loan;
 import com.template.api.apps.loan.dto.LoanDto;
 import com.template.api.apps.loan.service.LoanService;
-import com.template.api.utils.dtos.PagableDto;
+import com.template.api.apps.member.Member;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import javassist.NotFoundException;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,38 +22,37 @@ public class LoanController {
 
     private final LoanService loanService;
 
-    @ApiOperation(value = "대출상품 조회")
+    //대출상품 불러오기
+    @ApiOperation(value = "대출상품 불러오기")
     @GetMapping
-    public List<Loan> index() {
-        return loanService.index();
+    public List<Loan> selectLoans() {
+        return loanService.selectLoans();
     }
-
-//    @ApiOperation(value = "금융사명으로 조회")
-//    @GetMapping()
-//    public Loan search(@RequestParam(value = "keyword") String keyword) {
-//        List<LoanDto> loanDtoList = loanService
-//    }
-
-    @ApiOperation(value = "대출상품 등록")
+    // 특정 대출상품 불러오기
+    @ApiOperation(value = "특정 대출상품 불러오기")
+    @GetMapping("/{id}")
+    public Loan getLoan(@PathVariable Long id) {
+        return loanService.getLoan(id);
+    }
+    // 대출상품 추가하기
+    @ApiOperation(value = "대출상품 추가하기")
     @PostMapping
-    public ResponseEntity<Loan> create(LoanDto dto) {
-        Loan created = loanService.create(dto);
-        return created != null ? ResponseEntity.status(HttpStatus.OK).body(created) : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    public Loan saveLoan(@RequestBody Loan loan) {
+        return loanService.saveLoan(loan);
     }
 
-    @ApiOperation(value = "대출상품 수정")
-    @PutMapping
-    public ResponseEntity<Loan> update(@PathVariable Long id, LoanDto dto) {
-        Loan updated = loanService.update(id, dto);
-        return (updated != null) ? ResponseEntity.status(HttpStatus.OK).body(updated):
-        ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    // 대출 수정하기
+    @ApiOperation(value = "대출상품 수정하기")
+    @PutMapping("/{id}")
+    public Loan updateLoan(@PathVariable Long id, @RequestBody Loan loan) {
+        return loanService.updateLoan(id, loan);
     }
 
-    @ApiOperation(value = "대출상품 삭제")
+    // 대출 삭제하기
+    @ApiOperation(value = "대출상품 삭제하기")
     @DeleteMapping
-    public ResponseEntity<Loan> delete(Long id) {
-        Loan deleted = loanService.delete(id);
-        return (deleted != null) ? ResponseEntity.status(HttpStatus.OK).build() :
-                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteLoan(@PathVariable Long id) {
+        loanService.deleteLoan(id);
     }
 }

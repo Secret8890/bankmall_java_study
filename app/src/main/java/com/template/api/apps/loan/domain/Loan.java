@@ -21,42 +21,36 @@ public class Loan {
     @Id // 대표값 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // 자동 생성 어노테이션
     private Long id;
-    @Column
     private String financeType;
-    @Column
     private String bankName;
-    @Column
     private String loanType;
-    @Column
-    private double baseRate;
-    @Column
-    private double addRate;
-    @Column
+    private Double baseRate;
+    private Double addRate;
     private String rateBySpecial;
 
 ////        private List<SalesDto> salesList = Lists.newArrayList();
-    @Column
-    private double rate;
-    @Column
-    private long returnYear;
-    @Column
-    private long minReturnYear;
-    @Column
-    private long maxReturnYear;
-    @Column
-    private double repaymentFees;
-    @Column
+    private Double rate;
+    private Long returnYear;
+    private Long minReturnYear;
+    private Long maxReturnYear;
+    private Double repaymentFees;
     private String returnMethod;
-    @Column
-    private double repaymentFeesYear;
+    private Double repaymentFeesYear;
 
-
-
-    public void put(Loan loan) {
-        if (loan.bankName != null) {
-            // 만약 loan에 있는 bankName 데이터가 null이 아니라면
-            this.bankName = loan.bankName;
-            // this.bankName은 loan.bankName과 같다
-        }
+    public void update(Loan loan) {
+        this.financeType = loan.financeType;
+        this.bankName = loan.bankName;
+        this.loanType = loan.loanType;
+        this.baseRate = loan.baseRate;
+        this.addRate = loan.addRate;
+        this.rateBySpecial = loan.rateBySpecial;
+        this.rate = loan.rate;
+        this.returnYear = loan.returnYear;
+        this.minReturnYear = loan.minReturnYear;
+        this.maxReturnYear = loan.maxReturnYear;
+        this.repaymentFees = loan.repaymentFees;
+        this.returnMethod = loan.returnMethod;
+        this.repaymentFeesYear = loan.repaymentFeesYear;
     }
+
 }
