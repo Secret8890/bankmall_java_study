@@ -66,5 +66,12 @@ public class AccountDto {
         private String nickname;
 
     }
+    @Getter
+    @Setter
+    @ApiModel("AccountDto_Delete")
+    public static class Delete {
+        @ApiModelProperty(value = "삭제할 회원 아이디")
+        private Long id;
+    }
 
 }

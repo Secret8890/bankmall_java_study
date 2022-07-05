@@ -18,6 +18,7 @@ public interface AccountDtoMapper extends BaseDtoMapper<Account, AccountDto.Resp
 
   void update(AccountDto.Update update,@MappingTarget Account account);
 
+  Account delete(AccountDto.Delete delete);
 }
 
 

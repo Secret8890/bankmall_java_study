@@ -46,4 +46,12 @@ public class ReviewDto {
         private String title;
         private String content;
     }
+
+    @Getter
+    @Setter
+    @ApiModel("Review_DeleteDto")
+    public static class delete {
+
+        private Long id;
+    }
 }

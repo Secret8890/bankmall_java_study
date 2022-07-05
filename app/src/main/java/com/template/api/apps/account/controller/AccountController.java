@@ -4,6 +4,7 @@ import com.template.api.apps.account.dto.AccountDto;
 import com.template.api.apps.account.service.AccountService;
 import com.template.api.utils.dtos.PagableDto;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class AccountController {
 
     @ApiOperation(value = "회원변경")
     @PutMapping("/{id}")
-    public void UpdateAccount(@PathVariable Long id, AccountDto.Update update)  {
+    public void UpdateAccount(@PathVariable Long id, @RequestBody AccountDto.Update update)  {
         accountService.update(id, update);
     }
 
@@ -42,5 +43,11 @@ public class AccountController {
     public AccountDto.Response detail(@PathVariable Long id) {
         return accountService.detail(id);
 
+    }
+
+    @ApiModelProperty(value = "회원삭제")
+    @DeleteMapping("/{id}")
+    public void DeleteAccount(@PathVariable Long id) throws NullPointerException{
+        accountService.deleteaccount(id);
     }
 }

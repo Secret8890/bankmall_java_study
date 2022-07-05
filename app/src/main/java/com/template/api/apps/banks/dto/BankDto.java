@@ -295,4 +295,3 @@ public class BankDto {
             private Long id;
         }
     }
-

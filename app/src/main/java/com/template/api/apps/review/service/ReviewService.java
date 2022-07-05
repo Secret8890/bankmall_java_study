@@ -52,18 +52,12 @@ public class ReviewService {
 
         PagableDto.Response<ReviewDto.Response> pages = PagableDto.Response.of(items);
 
-
-
         return pages;
     }
-
-
-
 
 //    public List<ReviewDto.Response> getReviews(ReviewDto.Request request) {
 //        return null;
 //    }
-
 
     @Transactional
     public void update(Long id, ReviewDto.Update update) throws NullPointerException {
@@ -87,5 +81,7 @@ public class ReviewService {
         return response;
 
     }
+
+
 
 }

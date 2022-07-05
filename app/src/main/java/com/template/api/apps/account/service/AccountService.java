@@ -42,14 +42,6 @@ public class AccountService {
 
         return pages;
     }
-//
-//    public List<AccountDto.Response> getAccounts(AccountDto.Request request) {
-//        return null;
-//    }
-//
-//    public AccountDto.Response getAccount(long id) {
-//        return null;
-//    }
 
     @Transactional
     public void createAccount(AccountDto.Create create) {
@@ -69,8 +61,6 @@ public class AccountService {
         Account account = accountRepository.findById(id).orElseThrow(()->new NullPointerException("잘못된 ID 입니다."));
 
         AccountDtoMapper.INSTANCE.update(update,account);
-
-
     }
 
     public AccountDto.Response detail (Long id){
@@ -79,6 +69,11 @@ public class AccountService {
 
         return response;
 
+    }
+
+    @Transactional
+    public void deleteaccount(Long id) {
+        accountRepository.deleteById(id);
     }
 
 }
