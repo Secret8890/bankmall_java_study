@@ -37,14 +37,16 @@ storage:
 spring:
   profiles: local
   datasource:
-    url: jdbc:mysql://in.actbase.io:3306/template_serv?zeroDateTimeBehavior=convertToNull&autoReconnection=true&autoReconnectForPools=true&allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8
-    username: actbase_serv
-    password: actbaseServ!2
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/
+    username: postgres
+    password: 145145
   jpa:
     show-sql: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+    database: postgresql
     properties:
       hibernate:
         format_sql: true

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(tags = "01. [BANK] 은행관리 API")
+@Api(tags = "02. [BANK] 은행관리 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v2/bank")
@@ -24,7 +24,9 @@ public class BankController {
 
     @ApiOperation( value = "금융사 명 등록")
     @PostMapping
-    public void createBankName(BankDto.Create create) {bankService.createBankName(create);}
+    public void createBankName(BankDto.Create create) {
+        bankService.createBankName(create);
+    }
 
 
     @ApiOperation(value = "금융사명 조회")
@@ -40,5 +42,20 @@ public class BankController {
             throw new NotFoundException(" 없는 id 입니다");
         }
     }
+
+    @ApiOperation(value = "부수거래 항목")
+    @GetMapping("/calc")
+    public BankDto.CalcResponse getCalcData(BankDto.CalcRequest calcRequest) {
+         bankService.getCalcData(calcRequest);
+         return null;
+    }
+
+    @ApiOperation(value = "금융사정보 변경")
+    @PutMapping
+    public void updateBank(Long id,@RequestBody BankDto.Update update){
+        bankService.updateBank(id, update);
+    }
+
+
 
 }
