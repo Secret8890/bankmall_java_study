@@ -17,6 +17,7 @@ import java.util.List;
 @Table(name = "Banks")
 public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.Response> {
 
+    private Double rate ;
 
     private String financeType; // 금융사 종류
 
@@ -28,11 +29,8 @@ public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.R
 
     private Double addRate; // 가산금리
 
-
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Sales> discountRows = Lists.newArrayList();
-
-    private Double rate; //  최종금리
+    private List<Sales> discountrows = Lists.newArrayList();
 
     private Long returnYear; // 상환기간
 
@@ -46,6 +44,7 @@ public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.R
 
     private String repaymentFeesYear; //  몇년간
 
+    private String repaymentExemption; // 면제
     //private  bLogo
     //private  sLogo
     @Override

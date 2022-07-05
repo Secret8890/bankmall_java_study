@@ -14,8 +14,6 @@ import java.util.List;
 
 @Data
 public class BankDto {
-
-
     @Getter
     @Setter
     @ApiModel("BankDto_Request")
@@ -28,6 +26,7 @@ public class BankDto {
     @Setter
     @ApiModel("BankDto_Response")
     public static class Response{
+
         @ApiModelProperty(value = "고유번호")
         private Long id;
 
@@ -52,44 +51,35 @@ public class BankDto {
         @ApiModelProperty(value = "기준금리")
         private Double baseRate;
 
-//        @ApiModelProperty(value = "할인금리")
-//        private Double discountRate;
+        @ApiModelProperty(value = "할인금리")
+        private Double discountRate;
 
         @ApiModelProperty(value = "대출기간")
         private Long returnYear;
 
-
         @ApiModelProperty(value = " 최소대출기간 ")
         private Long minReturnYear;
-
 
         @ApiModelProperty(value = "최대대출기간")
         private Long maxReturnYear;
 
-
         @ApiModelProperty(value = "중도상환수수료율")
         private Double repaymentFees;
-
 
         @ApiModelProperty(value = " 중도상환수수료 몇년간 ")
         private String repaymentFeesYear;
 
-
         @ApiModelProperty(value = " 중도상환수수료 면제 ")
         private String repaymentExemption;
-
 
         @ApiModelProperty(value = " 상환방식 ")
         private String returnMethod;
 
-
         @ApiModelProperty(value = "대출금액")
         private Long loanMoney;
 
-
         @ApiModelProperty(value = "상환금액")
         private Long returnMoney;
-
 
         @ApiModelProperty(value = "할인금리리스트")
         private List<SaleResponse> discountrows = Lists.newArrayList();
@@ -139,11 +129,8 @@ public class BankDto {
         @ApiModelProperty(value = " 상환방식 ")
         private String returnMethod;
 
-        @ApiModelProperty(value = " 할인 ")
-        private Double discountrate;
-
         @ApiModelProperty(value = "할인금리리스트")
-        private List<SaleCreate> discountRows = Lists.newArrayList();
+        private List<SaleCreate> discountrows = Lists.newArrayList();
 
     }
 
@@ -170,19 +157,16 @@ public class BankDto {
         private Double baseRate;
 
         @ApiModelProperty(value = "할인금리리스트")
-        private List<SaleUpdate> discountRows = Lists.newArrayList();
+        private List<SaleUpdate> discountrows = Lists.newArrayList();
 
         @ApiModelProperty(value = "대출기간")
         private Long returnYear;
 
-
         @ApiModelProperty(value = " 최소대출기간 ")
         private Long minReturnYear;
 
-
         @ApiModelProperty(value = "최대대출기간")
         private Long maxReturnYear;
-
 
         @ApiModelProperty(value = "중도상환수수료율")
         private Double repaymentFees;
@@ -190,10 +174,8 @@ public class BankDto {
         @ApiModelProperty(value = " 중도상환수수료 몇년간 ")
         private String repaymentFeesYear;
 
-
         @ApiModelProperty(value = " 중도상환수수료 면제 ")
         private String repaymentExemption;
-
 
 //        @ApiModelProperty(value = " 상환방식 ")
 //        private String returnMethod;
@@ -271,25 +253,45 @@ public class BankDto {
         private String returnMethod;
 
         @ApiModelProperty(value = "할인금리리스트")
-        private List<SaleCreate> discountRows = Lists.newArrayList();
+        private List<SaleCreate> discountrows = Lists.newArrayList();
 
     }
     @Getter
     @Setter
     @ApiModel("SaleListDto")
     public static class SaleResponse {
-        @ApiModelProperty(value = "할인항목")
-        private String discountCondition;
 
         @ApiModelProperty(value = "할인금리")
         private Double discountRate;
+
+        @ApiModelProperty(value = "할인항목")
+        private String discountCondition;
         }
+
+    @Getter
+    @Setter
+    @ApiModel("Cal")
+    public static class CalResponce {
+
+        @ApiModelProperty(value = "가산금리")
+        private Double addRate;
+
+        @ApiModelProperty(value = "할인금리")
+        private Double discountRate;
+
+        @ApiModelProperty(value = "기준금리")
+        private Double baseRate;
+
+        @ApiModelProperty(value = "최종금리")
+        private Double rate;
+    }
 
         @Getter
         @Setter
         @ApiModel("BankDeleteDto")
         public static class delete {
             @ApiModelProperty(value = "금융사 삭제")
+
             private Long id;
         }
     }

@@ -6,18 +6,20 @@
 //import com.template.api.jpa.base.BaseRepository;
 //import org.springframework.stereotype.Repository;
 //import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
 //
 //@Repository
 //@Service
 //
 //public interface CalService extends BaseRepository<Bank> {
-//    @Transactional
 //
-//    public default void responseBank(BankDto.Response response) throws NullPointerException{
-//        if(response.getBaseRate() >= 0 ){
-//            response.setRate(response.getBaseRate()+ response.getAddRate()-response.getRateByUseMethodMax());
-//            Bank bank = BankDtoMapper.INSTANCE.calRate(response);
+//    public CalService(BankDto.CalResponce calResponce) throws NullPointerException{
+//        if(calResponce.getBaseRate() >= 0 ){
+//            calResponce.setRate(calResponce.getBaseRate()+ calResponce.getAddRate()-calResponce.getDiscountRate());
+//            Bank bank = BankDtoMapper.INSTANCE.calRate(calResponce);
+//
+//            BankDto.Create create = BankDtoMapper.INSTANCE.create(create);
+//
+//            return calResponce.setRate(bank);
 //
 //        } else {
 //            throw new NullPointerException("값을 정확히 입력하세요");
@@ -28,4 +30,4 @@
 //            throw new NullPointerException("값을 정확히 입력하세요...");
 //        }
 //    }
-//}
+// }

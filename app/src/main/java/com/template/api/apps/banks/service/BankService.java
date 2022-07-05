@@ -1,6 +1,5 @@
 package com.template.api.apps.banks.service;
 
-
 import com.google.common.collect.Lists;
 import com.template.api.apps.banks.domain.Bank;
 import com.template.api.apps.banks.domain.BankRepository;
@@ -27,80 +26,59 @@ import java.util.stream.Collectors;
 public class BankService{
     private final BankRepository bankRepository;
 
-
+    // 금융사 내용 수정
     @Transactional
     public void update(Long id, BankDto.Update update) throws NullPointerException {
 
         Bank bank = bankRepository.findById(id).orElseThrow(()->new NullPointerException("잘못된 ID 입니다."));
 
         BankDtoMapper.INSTANCE.update(update,bank);
-//
 
-        for(BankDto.SaleUpdate item : update.getDiscountRows() ){
+        for(BankDto.SaleUpdate item : update.getDiscountrows() ){
 
             Sales sales = BankDtoMapper.INSTANCE.update(item);
             sales.setBank(bank);
-            bank.getDiscountRows().add(sales);
+            bank.getDiscountrows().add(sales);
         }
 
-        List<Sales> discountRows = Lists.newArrayList();
+        List<Sales> discountrows = Lists.newArrayList();
 
-        bank.getDiscountRows().addAll(discountRows);
+        bank.getDiscountrows().addAll(discountrows);
 
     }
-
-
-
-//    public Boolean update (Bank bank, long id) {
-//        Bank before = bankRepository.findById(id).get();
-//
-//        if(before.getId()==(bank.update(bank).getId())){
-//            before.update(bank.update(bank));
-//            bankRepository.save(bank);
-//            return true;
-//        }
-//        return false;
-//    }
-
-
-
     @Transactional
     public void deleteBank(Long id) {
         bankRepository.deleteById(id);
     }
 
-//    @Transactional
-//    public void Update (Long id) {
-//        bankRepository.findById(id);
-//    }
-//    @Transactional
-//    public List<BankDto> searchList(String keyword) {
-//
-//        return bankRepository.findAll(keyword).stream()
-//                .map(BankDto::new)
-//                .collect(Collectors.toList());
-//    }
+    // 금융사 등록
     @Transactional
     public void createBank (BankDto.Create create) throws NullPointerException{
         if (create == null) {
             throw new NullPointerException("정확한값을 입력해주세요 ..") ;
         } else {
 
+//            create.setRate(create.getBaseRate()+ create.getAddRate()-create.getDiscountRate());
+
             Bank bank = BankDtoMapper.INSTANCE.create(create);
 //            bank.getDiscountRows().clear(); //
 
-            for(BankDto.SaleCreate item : create.getDiscountRows()) {
+            for(BankDto.SaleCreate item : create.getDiscountrows()) {
+
                 Sales sales = BankDtoMapper.INSTANCE.createSales(item);
+
+                bank.getDiscountrows().add(sales);
+
                 sales.setBank(bank);
-                bank.getDiscountRows().add(sales);
 
+                bank.setRate((bank.getAddRate()+ bank.getBaseRate()- item.getDiscountRate()));
             }
-            List<Sales> discountRows = Lists.newArrayList();
 
-            bank.getDiscountRows().addAll(discountRows);
-            create.setRate(create.getBaseRate()+ create.getAddRate());
+            List<Sales> discountrows = Lists.newArrayList();
+
+            bank.getDiscountrows().addAll(discountrows);
+
             bankRepository.save(bank);
-
         }
     }
 
@@ -112,62 +90,39 @@ public class BankService{
 //            BankDto.Update bank = BankDtoMapper.INSTANCE.Update(update);
 //        }
 //    }
-        @Transactional
-
-        public void creatdiscountrows(BankDto.SaleCreate salecreate) throws NullPointerException {
-            if (salecreate == null) {
-                throw new NullPointerException("정확한값을 입력해주세요 ..");
-            } else {
-//                    Bank bank = BankDtoMapper.INSTANCE.create(salecreate);
-//                Bank bank = BankDtoMapper.INSTANCE.create(salecreate);
-
-                Sales sales = BankDtoMapper.INSTANCE.createSales(salecreate);
-
-            }
-        }
-
-
-
-
-
 //    @Transactional
-//    public void responseList(BankDto.SaleResponse saleresponse) throws NullPointerException {
-//        if (saleresponse == null) {
-//            throw new NullPointerException("값이 없습니다 ..");
-//        } else {
-//            List<BankDto.SaleResponse> sales = BankDtoMapper.INSTANCE.toResponse(saleresponse);
-//        }
-
-
-//    @Transactional
+//    public Bank calResponce (BankDto.Request request) throws NullPointerException{
 //
-//    public void responseBank(BankDto.Response response){
-//        if(response.getBaseRate() >= 0 ){
-//            response.setRate(response.getBaseRate()+ response.getAddRate());
-//            Bank bank = BankDtoMapper.INSTANCE.calRate(response);
+//        Bank bank = BankDtoMapper.INSTANCE.CalResponce(request);
+//        Bank bank = BankDtoMapper.INSTANCE.CalResponce(request);
+//        Sales sales = new Sales();
 //
-//        } else {
-//            throw new NullPointerException("값을 정확히 입력하세요");
-//        }
+//        bank.setRate(bank.getBaseRate()+bank.getAddRate()-sales.getDiscountRate());
 //
-//        if(response.getLoanMoney()>=0) {
-//            response.setReturnMoney((long) ((response.getLoanMoney() * response.getRate() / 12) + (response.getLoanMoney() / (response.getReturnYear()) * 12)));
-//        }else {
-//            throw new NullPointerException("값을 정확히 입력하세요...");
-//        }
-//
-
-//    @Transactional
-//    public void calRate(BankDto.Response response){
-//        if(response.getRate()<0){
-//            throw new NullPointerException("정확한 값을 입력해주세요");
-//        } else{
-//            Bank bank = BankDtoMapper.INSTANCE.calRate(response);
-//
-//        }
-//
+//        return createBank(request);
 //    }
 
+    private Bank createBank(BankDto.Request request) {
+        return null;
+    }
+
+//@Transactional
+//public Bank calRate(BankDto.Request request){
+//        Bank bank = BankDtoMapper.INSTANCE.calRate(request);
+//        return calRate(request);
+//}
+
+//    @Transactional
+//    public BankDto.Response calRate(BankDto.CalResponce responce) {
+//
+//        Bank bank = new Bank();
+//        BankDtoMapper.INSTANCE.toResponse(bank);
+//        Sales sales = new Sales();
+//
+//        bank.setRate(bank.getBaseRate() + bank.getAddRate() - sales.getDiscountRate());
+//
+//        return calRate(responce);
+//    }
 
     @Transactional
 
@@ -216,21 +171,17 @@ public class BankService{
     }
 
 
-
-//    public BankDto.Update update( BankDto.Update update) {
-//        return update;
-//    }
-
-    public List<BankDto.Response> getbank(BankDto.Request request) {
-        return null;
-    }
-
+    // 상세조회
     public BankDto.Response detail (Long id){
         Bank bank = bankRepository.findById(id).orElseThrow(()->new NullPointerException("잘못된 ID 값입니다."));
         BankDto.Response response = bank.toResponse();
-        if(bank.getDiscountRows() != null && bank.getDiscountRows().size()> 0 ) {
-            response.setDiscountrows(bank.getDiscountRows().stream().map(Sales::toResponse).collect(Collectors.toList()));
+        if(bank.getDiscountrows() != null && bank.getDiscountrows().size()> 0 ) {
+            response.setDiscountrows(bank.getDiscountrows().stream().map(Sales::toResponse).collect(Collectors.toList()));
         }
+
         return response;
+
     }
+
+
 }
