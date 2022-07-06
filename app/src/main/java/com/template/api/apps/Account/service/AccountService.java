@@ -9,4 +9,7 @@ public interface AccountService {
     void createAccount(AccountDto.Create create);
 
     void updateAccount(Long id, AccountDto.Update update);
+
+
+    void deleteAccount(Long id);
 }

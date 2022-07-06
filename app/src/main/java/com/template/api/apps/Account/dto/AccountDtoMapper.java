@@ -11,7 +11,7 @@ import java.util.List;
 public interface AccountDtoMapper extends BaseDtoMapper<Account, AccountDto.Response, AccountDto.Create, AccountDto.Update> {
 
     AccountDtoMapper INSTANCE = Mappers.getMapper(AccountDtoMapper.class);
-    List<AccountDto.Response> toResponses(List<Account> accounts);
+    List<AccountDto.Response> toResponse(List<Account> accounts);
     Account create(AccountDto.Create create);
     void update(AccountDto.Update update, @MappingTarget Account account);
 

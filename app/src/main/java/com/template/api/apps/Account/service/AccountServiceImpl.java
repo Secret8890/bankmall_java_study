@@ -52,4 +52,11 @@ public class AccountServiceImpl implements AccountService{
     public void updateAccount(Long id, AccountDto.Update update) {
 
     }
+
+    @Override
+    public void deleteAccount(Long id) {
+        accountRepository.deleteById(id);
+    }
+
+
 }

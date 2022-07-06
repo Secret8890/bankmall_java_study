@@ -5,6 +5,7 @@ import com.template.api.apps.Account.service.AccountService;
 import com.template.api.utils.dtos.PagableDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +31,18 @@ public class AccountController {
     }
     @ApiOperation(value = "회원정보 수정")
     @PatchMapping
-    public void UpdateAccount(Long id, AccountDto.Update update) {
+    public void UpdateAccount(Long id,@RequestBody AccountDto.Update update) {
         accountService.updateAccount(id, update);
     }
 
+    @ApiOperation(value = "회원 탈퇴")
+    @DeleteMapping
+    public void deleteAccount(Long id) throws NotFoundException {
+        if (id!=null) {
+            accountService.deleteAccount(id);
+        } else {
+            throw new NotFoundException("없는 id 입니다");
+        }
+    }
 
 }

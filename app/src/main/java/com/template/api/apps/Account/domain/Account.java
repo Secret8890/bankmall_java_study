@@ -6,10 +6,13 @@ import com.template.api.apps.Account.dto.AccountDtoMapper;
 import com.template.api.jpa.base.BaseDomainWithId;
 import com.template.api.jpa.base.DomainWithMapper;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Account extends BaseDomainWithId implements DomainWithMapper<AccountDto.Response> {
 
