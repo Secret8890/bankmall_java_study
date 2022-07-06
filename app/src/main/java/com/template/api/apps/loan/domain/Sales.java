@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 public class Sales extends BaseDomainWithId {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Loan loan;
+    private Loan loan; // 대출 객체
 
     private String rateBySpecial; // 할인항목
 
