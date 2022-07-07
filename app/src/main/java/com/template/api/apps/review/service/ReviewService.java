@@ -54,7 +54,6 @@ public class ReviewService {
 
         return pages;
     }
-
 //    public List<ReviewDto.Response> getReviews(ReviewDto.Request request) {
 //        return null;
 //    }
@@ -66,22 +65,15 @@ public class ReviewService {
 
         ReviewDtoMapper.INSTANCE.update(update,review);
 
-
     }
-
     @Transactional
     public void deleteReview(long id) {
         reviewRepository.deleteById(id);
     }
-
     public ReviewDto.Response detail (Long id){
         Review review = reviewRepository.findById(id).orElseThrow(()->new NullPointerException("잘못된 ID 값입니다."));
         ReviewDto.Response response = review.toResponse();
 
         return response;
-
     }
-
-
-
 }

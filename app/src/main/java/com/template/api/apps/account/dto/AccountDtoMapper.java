@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface AccountDtoMapper extends BaseDtoMapper<Account, AccountDto.Response, AccountDto.Create, AccountDto.Update> {
+
   AccountDtoMapper INSTANCE = Mappers.getMapper(AccountDtoMapper.class);
 
   List<AccountDto.Response> toResponses(List<Account> accounts);

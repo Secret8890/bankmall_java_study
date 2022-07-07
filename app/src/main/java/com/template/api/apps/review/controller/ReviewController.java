@@ -12,23 +12,20 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = {"후기 게시판"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api/v2/review")
+@RequestMapping(path = "/api/v2/reviews")
 
 public class ReviewController {
     private final ReviewService reviewService;
-
     @ApiOperation(value = "게시글 목록 확인")
     @GetMapping
     public PagableDto.Response<ReviewDto.Response> getReviews(ReviewDto.Request request) {
         return reviewService.getPageReviews(request);
     }
-
     @ApiOperation(value = "글작성")
     @PostMapping
     public void createReview(@RequestBody ReviewDto.Create create) throws NullPointerException {
         reviewService.createReview(create);
     }
-
     @ApiOperation(value = "글 수정")
     @PutMapping("/{id}")
     public void UpdateReview(@PathVariable Long id, ReviewDto.Update update) throws NotFoundException {

@@ -73,5 +73,4 @@ public class AccountDto {
         @ApiModelProperty(value = "삭제할 회원 아이디")
         private Long id;
     }
-
 }

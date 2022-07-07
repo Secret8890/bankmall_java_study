@@ -43,7 +43,7 @@ public class AccountService {
         return pages;
     }
 
-    @Transactional
+    @Transactional 
     public void createAccount(AccountDto.Create create) {
 
         if(create == null){
@@ -68,12 +68,10 @@ public class AccountService {
         AccountDto.Response response = account.toResponse();
 
         return response;
-
     }
 
     @Transactional
     public void deleteaccount(Long id) {
         accountRepository.deleteById(id);
     }
-
 }

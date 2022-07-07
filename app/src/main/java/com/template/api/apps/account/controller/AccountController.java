@@ -37,7 +37,6 @@ public class AccountController {
         accountService.update(id, update);
     }
 
-
     @GetMapping("/{id}")
     @ApiOperation(value = "회원 상세조회")
     public AccountDto.Response detail(@PathVariable Long id) {

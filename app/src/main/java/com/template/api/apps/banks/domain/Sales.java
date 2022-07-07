@@ -21,7 +21,6 @@ public class Sales extends BaseDomainWithId {
     private String discountCondition; // 할인항목
 
     private Double discountRate; // 할인금리
-
     public BankDto.SaleResponse toResponse() {
         return BankDtoMapper.INSTANCE.toResponse(this);
     }
