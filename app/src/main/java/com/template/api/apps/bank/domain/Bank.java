@@ -5,15 +5,17 @@ import com.template.api.apps.bank.dto.BankDto;
 import com.template.api.apps.bank.dto.BankDtoMapper;
 import com.template.api.jpa.base.BaseDomainWithId;
 import com.template.api.jpa.base.DomainWithMapper;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "금융사")
 public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.Response> {
 
     private String bankId;

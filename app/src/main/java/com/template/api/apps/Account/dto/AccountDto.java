@@ -9,7 +9,9 @@ import lombok.Setter;
 public class AccountDto {
     @Getter
     @Setter
+    @ApiModel("AccountDto_Request")
     public static class Request extends PagableDto.Request{
+        @ApiModelProperty(value = "검색어", position = 1)
         private String keyword;
     }
 
@@ -28,6 +30,7 @@ public class AccountDto {
         private String name;
 
     }
+
     @Getter
     @Setter
     @ApiModel("AccountDto_Create")
@@ -42,6 +45,7 @@ public class AccountDto {
         @ApiModelProperty(value = "패스워드")
         private String password;
     }
+
     @Getter
     @Setter
     @ApiModel("AccountDto_Update")
@@ -58,5 +62,11 @@ public class AccountDto {
     }
 
 
+    @Getter
+    @Setter
+    @ApiModel("AccountDto_Delete")
+    public static class Delete{
+        private Long id;
+    }
 
 }
