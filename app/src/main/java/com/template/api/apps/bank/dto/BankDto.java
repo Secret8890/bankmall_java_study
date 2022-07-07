@@ -5,14 +5,17 @@ import com.google.common.collect.Lists;
 import com.template.api.utils.dtos.PagableDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Data
 public class BankDto  {
 
     @Getter
@@ -44,13 +47,13 @@ public class BankDto  {
 
         @ManyToOne
         @ApiModelProperty(value = " 부수거래 항목")
-        private CalcRequest calcRequest;
+        private List<SaleCreate> discountRows = Lists.newArrayList();
 
-       // @ApiModelProperty(value = "대출 금리")
-        // private Double rate;
+        @ApiModelProperty(value = "대출 금리")
+        private Double rate;
 
-       // @ApiModelProperty(value = "대출 기간")
-      //  private Long returnYear;
+        @ApiModelProperty(value = "대출 기간")
+        private Long returnYear;
 
         @ApiModelProperty(value = "최소 기간")
         private Long minReturnYear;
@@ -103,8 +106,8 @@ public class BankDto  {
         @ApiModelProperty(value = "대출 금리")
         private Double rate;
 
-     //   @ApiModelProperty(value = "대출 기간")
-     //   private Long returnYear;
+        @ApiModelProperty(value = "대출 기간")
+        private Long returnYear;
 
         @ApiModelProperty(value = "최소 기간")
         private Long minReturnYear;
@@ -132,7 +135,7 @@ public class BankDto  {
 
         @ManyToOne
         @ApiModelProperty(value = " 부수거래 항목")
-        private CalcRequest calcRequest;
+        private List<SaleResponse> discountRows = Lists.newArrayList();
     }
 
     @Getter
@@ -159,13 +162,13 @@ public class BankDto  {
 
         @ManyToOne
         @ApiModelProperty(value = " 부수거래 항목")
-        private CalcRequest calcRequest;
+        private List<SaleUpdate> discountRows = Lists.newArrayList();
 
-       // @ApiModelProperty(value = "대출 금리")
-       // private Double rate;
+        @ApiModelProperty(value = "대출 금리")
+        private Double rate;
 
-       // @ApiModelProperty(value = "대출 기간")
-       // private Long returnYear;
+        @ApiModelProperty(value = "대출 기간")
+        private Long returnYear;
 
         @ApiModelProperty(value = "최소 기간")
         private Long minReturnYear;
@@ -196,11 +199,22 @@ public class BankDto  {
 
     @Getter
     @Setter
-    @ApiModel("BankDto_CalcRequest")
-    public static class CalcRequest{
+    @Table(name ="부수거래 항목")
+    @ApiModel("BankDto_SaleResponse")
+    public static class SaleCreate  {
 
-        @ApiModelProperty(value = "은행관리번호")
-        private  Long id;
+        @ApiModelProperty(value = "부수거래 내용")
+        private String discountCondition;
+
+        @ApiModelProperty(value = "부수거래 이자")
+        private Double discountRate;
+
+
+    }
+    @Getter
+    @Setter
+    @ApiModel("BankDto_SaleUpdate")
+    public static class SaleUpdate {
 
         @ApiModelProperty(value = "부수거래 내용")
         private String discountCondition;
@@ -208,20 +222,15 @@ public class BankDto  {
         @ApiModelProperty(value = "부수거래 이자")
         private Double discountRate;
    }
-    @Getter
-    @Setter
-    @ApiModel("BankDto_CalcResponse")
-    public static class CalcResponse{
-
-        @ApiModelProperty(value = "은행관리번호")
-        private  Long id;
-
+   @Getter
+   @Setter
+   @ApiModel("BankDto_SaleResponse")
+    public static class SaleResponse {
         @ApiModelProperty(value = "부수거래 내용")
         private String discountCondition;
 
         @ApiModelProperty(value = "부수거래 이자")
         private Double discountRate;
-
 
     }
 }

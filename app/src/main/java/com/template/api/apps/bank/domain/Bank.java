@@ -1,6 +1,7 @@
 package com.template.api.apps.bank.domain;
 
 
+import com.google.common.collect.Lists;
 import com.template.api.apps.bank.dto.BankDto;
 import com.template.api.apps.bank.dto.BankDtoMapper;
 import com.template.api.jpa.base.BaseDomainWithId;
@@ -10,7 +11,10 @@ import lombok.Setter;
 
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,9 +38,12 @@ public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.R
     private String returnMethod; // 상환방식
     private String bLogo; // 큰 로고 이미지
     private String sLogo; // 작은 로고 이미지
-    private String discountRows; // 부수거래 항목
-    private String discountCondition; // 부수거래 내용
-    private Double discountRate; // 부수거래 이자
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Sales> discountRow = Lists.newArrayList(); // 부수거래 항목
+//
+//    private String discountCondition; // 부수거래 내용
+//    private Double discountRate; // 부수거래 이자
 
 
 

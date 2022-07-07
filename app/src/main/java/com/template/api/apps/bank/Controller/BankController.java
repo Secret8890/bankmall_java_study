@@ -4,6 +4,7 @@ package com.template.api.apps.bank.Controller;
 import com.amazonaws.services.kms.model.NotFoundException;
 import com.template.api.apps.bank.dto.BankDto;
 import com.template.api.apps.bank.service.BankServiceImpl;
+import com.template.api.utils.dtos.PagableDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class BankController {
 
     @ApiOperation(value = "금융사명 조회")
     @GetMapping
-    public List<BankDto.Response> getBanksName() {return bankService.getBanksName();}
+    public List<BankDto.Response> getBanks() {return bankService.getBanks();}
 
     @ApiOperation(value = "금융사 삭제")
     @DeleteMapping
@@ -44,10 +45,9 @@ public class BankController {
     }
 
     @ApiOperation(value = "부수거래 항목")
-    @GetMapping("/calc")
-    public BankDto.CalcResponse getCalcData(BankDto.CalcRequest calcRequest) {
-         bankService.getCalcData(calcRequest);
-         return null;
+    @GetMapping("/sales")
+    public PagableDto.Response<BankDto.Response> getSales(BankDto.Request response) {
+        return bankService.getPageSales(response);
     }
 
     @ApiOperation(value = "금융사정보 변경")
