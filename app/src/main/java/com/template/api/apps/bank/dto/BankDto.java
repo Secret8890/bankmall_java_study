@@ -233,4 +233,29 @@ public class BankDto  {
         private Double discountRate;
 
     }
+
+    @Getter
+    @Setter
+    @ApiModel("BankDto_Delete")
+    public static class delete{
+        private Long id;
+    }
+
+    @Getter
+    @Setter
+    @ApiModel("BankDto_Calc")
+    public static  class CalResponce {
+        @ApiModelProperty(value = "가산금리")
+        private Double addRate;
+
+        @ApiModelProperty(value = "할인금리")
+        private Double discountRate;
+
+        @ApiModelProperty(value = "기준금리")
+        private Double baseRate;
+
+        @ApiModelProperty(value = "최종금리")
+        private Double rate;
+    }
+
 }
