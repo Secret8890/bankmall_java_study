@@ -52,11 +52,13 @@ public class LoanService {
         log.info(dto.toEntity().toString());
         // 2. 타겟 조회
         Loan target = loanRepository.findById(id).orElse(null);
+        target.setAddRate(dto.getAddRate());
+
         log.info(target.toString());
         // 3. 잘못된 요청 처리
-        if (target == null || id != loan.getId()) {
+        if (target == null) {
             // 400 잘못된 요청 응답!
-            log.info("잘못된 요청! id: {}, article: {}", id, loan.toString());
+            log.info("잘못된 요청! id: {}", id);
             return null;
         }
         // 4. 업데이트

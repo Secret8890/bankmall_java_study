@@ -28,27 +28,27 @@ public class Loan {
     @Column
     private String loanType;
     @Column
-    private double baseRate;
+    private Double baseRate;
     @Column
-    private double addRate;
+    private Double addRate;
     @Column
     private String rateBySpecial;
 
 ////        private List<SalesDto> salesList = Lists.newArrayList();
     @Column
-    private double rate;
+    private Double rate;
     @Column
-    private long returnYear;
+    private Long returnYear;
     @Column
-    private long minReturnYear;
+    private Long minReturnYear;
     @Column
-    private long maxReturnYear;
+    private Long maxReturnYear;
     @Column
-    private double repaymentFees;
+    private Double repaymentFees;
     @Column
     private String returnMethod;
     @Column
-    private double repaymentFeesYear;
+    private Double repaymentFeesYear;
 
 
 

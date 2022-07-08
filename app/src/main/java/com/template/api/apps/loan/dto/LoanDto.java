@@ -13,10 +13,6 @@ import java.util.List;
 @Setter
 @Getter
 public class LoanDto {
-
-        @ApiModelProperty(value = "ID")
-        private Long id;
-
         @ApiModelProperty(value = "금융권")
         private String financeType;
 
@@ -28,10 +24,10 @@ public class LoanDto {
         private String loanType;
 
         @ApiModelProperty(value = "기준금리")
-        private double baseRate;
+        private Double baseRate;
 
         @ApiModelProperty(value = "가산금리")
-        private double addRate;
+        private Double addRate;
 
         @ApiModelProperty(value = "할증금리")
         private String rateBySpecial;
@@ -40,25 +36,25 @@ public class LoanDto {
 ////        private List<SalesDto> salesList = Lists.newArrayList();
 
         @ApiModelProperty(value = "대출금리")
-        private double rate;
+        private Double rate;
 
         @ApiModelProperty(value = "상환기간")
-        private long returnYear;
+        private Long returnYear;
 
         @ApiModelProperty(value = "최소상환기간")
-        private long minReturnYear;
+        private Long minReturnYear;
 
         @ApiModelProperty(value = "최대상환기간")
-        private long maxReturnYear;
+        private Long maxReturnYear;
 
         @ApiModelProperty(value = "중도상환수수료")
-        private double repaymentFees;
+        private Double repaymentFees;
 
         @ApiModelProperty(value = "상환방식")
         private String returnMethod;
 
         @ApiModelProperty(value = "중도상환수수료 면제율")
-        private double repaymentFeesYear;
+        private Double repaymentFeesYear;
 
         public Loan toEntity() {
                 return new Loan(null, financeType, bankName, loanType, baseRate, addRate, rateBySpecial, rate, returnYear, minReturnYear, maxReturnYear, repaymentFees, returnMethod, repaymentFeesYear);

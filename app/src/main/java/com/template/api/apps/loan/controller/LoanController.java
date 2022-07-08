@@ -46,7 +46,7 @@ public class LoanController {
     }
 
     @ApiOperation(value = "대출상품 수정")
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Loan> update(@PathVariable Long id, LoanDto dto) {
         Loan updated = loanService.update(id, dto);
         return (updated != null) ? ResponseEntity.status(HttpStatus.OK).body(updated):
