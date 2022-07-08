@@ -19,7 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "금융사")
+@Table(name = "finance company")
 public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.Response> {
 
     private String bankId;

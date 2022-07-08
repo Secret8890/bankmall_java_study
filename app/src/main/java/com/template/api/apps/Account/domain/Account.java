@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Table(name = "계정관리")
+@Table(name = "account management ")
 public class Account extends BaseDomainWithId implements DomainWithMapper<AccountDto.Response> {
 
     @Column(nullable = false, unique = true)
