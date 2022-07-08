@@ -30,7 +30,7 @@ public class AccountController {
         accountService.createAccount(create);
     }
     @ApiOperation(value = "회원정보 수정")
-    @PatchMapping
+    @PutMapping
     public void UpdateAccount(Long id,@RequestBody AccountDto.Update update) {
         accountService.updateAccount(id, update);
     }

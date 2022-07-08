@@ -50,6 +50,8 @@ public class AccountDto {
     @Setter
     @ApiModel("AccountDto_Update")
     public static class Update {
+
+
         @ApiModelProperty(value = "사용자 id")
         private String userId;
 

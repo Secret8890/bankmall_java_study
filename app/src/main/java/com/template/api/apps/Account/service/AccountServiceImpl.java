@@ -48,26 +48,6 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public List<AccountDto.Response> getAccounts(AccountDto.Request request) {
-        return null;
-    }
-
-    @Override
-    public AccountDto.Response getAccount(long id) {
-        return null;
-    }
-
-    @Override
-    public AccountDto.Response updateAccount(long id, AccountDto.Update update) {
-        return null;
-    }
-
-    @Override
-    public AccountDto.Update updateAccount(long id) {
-        return null;
-    }
-
-    @Override
     @Transactional
     public void createAccount(AccountDto.Create create) {
 
@@ -76,8 +56,9 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public void updateAccount(Long id, AccountDto.Update update) {
+    public void updateAccount(Long id, AccountDto.Update update) throws NotFoundException{
         Account account = accountRepository.findById(id).orElseThrow(()->new NotFoundException("id가 없습니다"));
+        AccountDtoMapper.INSTANCE.update(update,account);
     }
 
     @Override
