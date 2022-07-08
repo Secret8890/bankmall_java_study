@@ -47,6 +47,7 @@ public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.R
     private String repaymentExemption; // 면제
     //private  bLogo
     //private  sLogo
+
     @Override
     public BankDto.Response toResponse() throws NullPointerException {
         return BankDtoMapper.INSTANCE.toResponse(this);

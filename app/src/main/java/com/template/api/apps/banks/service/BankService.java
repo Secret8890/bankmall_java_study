@@ -10,6 +10,7 @@ import com.template.api.jpa.Restrictions;
 import com.template.api.utils.dtos.PagableDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional (readOnly = true)
+@Primary
 
 public class BankService{
     private final BankRepository bankRepository;
@@ -81,7 +83,6 @@ public class BankService{
             bankRepository.save(bank);
         }
     }
-
 //    @Transactional
 //    public void Update(Long id ,BankDto.Update update) throws NullPointerException{
 //        if(update == null){
@@ -101,11 +102,6 @@ public class BankService{
 //
 //        return createBank(request);
 //    }
-
-    private Bank createBank(BankDto.Request request) {
-        return null;
-    }
-
 //@Transactional
 //public Bank calRate(BankDto.Request request){
 //        Bank bank = BankDtoMapper.INSTANCE.calRate(request);
@@ -166,7 +162,6 @@ public class BankService{
         PagableDto.Response<BankDto.SaleResponse> pages = PagableDto.Response.of(items); //Page response mapping
 
         //endregion
-
         return pages;
     }
 
@@ -182,6 +177,4 @@ public class BankService{
         return response;
 
     }
-
-
 }

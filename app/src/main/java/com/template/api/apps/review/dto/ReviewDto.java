@@ -47,7 +47,6 @@ public class ReviewDto {
     @Setter
     @ApiModel("Review_DeleteDto")
     public static class delete {
-
         private Long id;
     }
 }
