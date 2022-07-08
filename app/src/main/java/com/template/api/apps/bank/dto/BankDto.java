@@ -46,7 +46,7 @@ public class BankDto  {
         private Double addRate;
 
         @ManyToOne
-        @ApiModelProperty(value = " 부수거래 항목")
+        @ApiModelProperty(value = "부수거래 항목")
         private List<SaleCreate> discountRows = Lists.newArrayList();
 
         @ApiModelProperty(value = "대출 금리")
@@ -134,7 +134,7 @@ public class BankDto  {
         private String sLogo;
 
         @ManyToOne
-        @ApiModelProperty(value = " Sale Lists")
+        @ApiModelProperty(value = "Sale Lists")
         private List<SaleResponse> discountRows = Lists.newArrayList();
     }
 
@@ -199,7 +199,7 @@ public class BankDto  {
 
     @Getter
     @Setter
-    @Table(name ="Sale Lists")
+    @Table(name ="SaleLists")
     @ApiModel("BankDto_SaleResponse")
     public static class SaleCreate  {
 
