@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 
 @Data

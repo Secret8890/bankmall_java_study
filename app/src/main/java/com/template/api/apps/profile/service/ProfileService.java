@@ -63,4 +63,11 @@ public class ProfileService {
         ProFileDtoMapper.INSTANCE.update(update,profile);
     }
 
+    public ProfileDto.Response detail (Long id){
+        Profile profile = profileRepository.findById(id).orElseThrow(()->new NullPointerException("잘못된 ID 값입니다."));
+        ProfileDto.Response response = profile.toResponse();
+
+        return response;
+    }
+
 }

@@ -46,13 +46,11 @@ public class BankService{
         List<Sales> discountrows = Lists.newArrayList();
 
         bank.getDiscountrows().addAll(discountrows);
-
     }
     @Transactional
     public void deleteBank(Long id) {
         bankRepository.deleteById(id);
     }
-
     // 금융사 등록
     @Transactional
     public void createBank (BankDto.Create create) throws NullPointerException{
@@ -134,7 +132,7 @@ public class BankService{
 
         PageRequest pageRequest = PageRequest.of(request.getPage(), request.getLimit(), sort);
 
-        Page<Bank> items = bankRepository.findAll(r.output(), pageRequest); //Page DATA GET
+        Page<Bank> items = bankRepository.findAll(r.output(), pageRequest);
 
         PagableDto.Response<BankDto.Response> pages = PagableDto.Response.of(items); //Page response mapping
 

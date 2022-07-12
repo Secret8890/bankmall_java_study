@@ -29,10 +29,15 @@ public class ProfileController {
     public void createProfile(@RequestBody ProfileDto.Create create) throws NotFoundException {
         profileService.createProfile(create);
     }
-
     @ApiOperation(value = " 프로필 수정")
     @PutMapping("/{id}")
     public  void updateProfile(@PathVariable Long id , @RequestBody ProfileDto.Update update) throws NotFoundException{
         profileService.update(id , update);
     }
+    @GetMapping("/{id}")
+    @ApiOperation(value = "프로필 상세조회")
+    public ProfileDto.Response detail(@PathVariable Long id) {
+        return profileService.detail(id);
+    }
+
 }

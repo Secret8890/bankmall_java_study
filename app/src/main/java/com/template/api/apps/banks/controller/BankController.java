@@ -24,8 +24,6 @@ public class BankController {
         return bankService.getPageBanks(request);
     }
 
-    // 금융사 등록
-
     @ApiOperation(value = " 금융사 등록 ")
     @PostMapping
     public void createBank(@RequestBody BankDto.Create create) throws NotFoundException {
