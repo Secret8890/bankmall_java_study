@@ -40,6 +40,7 @@ public class PartnerLogoServiceImpl implements PartnerLogoService{
     }
 
     @Override
+    @Transactional
     public void createPartnerLogo(PartnerLogoDto.Create create) {
 
         PartnerLogo partnerLogo = PartnerLogoDtoMapper.INSTANCE.create(create);

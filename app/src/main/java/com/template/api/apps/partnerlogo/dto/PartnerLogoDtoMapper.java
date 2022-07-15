@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface PartnerLogoDtoMapper extends BaseDtoMapper<PartnerLogo, PartnerLogoDto.Response, PartnerLogoDto.Create, PartnerLogoDto.Update> {
+public interface PartnerLogoDtoMapper  {
 
     PartnerLogoDtoMapper INSTANCE = Mappers.getMapper(PartnerLogoDtoMapper.class);
     PartnerLogoDto.Response toResponse(PartnerLogo partnerLogo);
@@ -17,6 +17,7 @@ public interface PartnerLogoDtoMapper extends BaseDtoMapper<PartnerLogo, Partner
     List<PartnerLogoDto.Response> toResponse(List<PartnerLogoDto> partnerLogos);
     void update(PartnerLogoDto.Update update,@MappingTarget PartnerLogo partnerLogo);
 
+    PartnerLogo delete(PartnerLogoDto.Delete delete);
 
 
 }

@@ -21,7 +21,7 @@ public class PartnerLogoController {
 
     @ApiOperation(value = "LOGO 등록")
     @PostMapping
-    public void updatePartnerLogo (PartnerLogoDto.Create create){
+    public void createPartnerLogo (PartnerLogoDto.Create create){
         partnerLogoService.createPartnerLogo(create);
     }
 
