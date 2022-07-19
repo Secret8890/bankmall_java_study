@@ -32,7 +32,9 @@ public class BankController {
 
     @ApiOperation(value = "금융사명 조회")
     @GetMapping
-    public List<BankDto.Response> getBanks() {return bankService.getBanks();}
+    public PagableDto.Response<BankDto.Response> getBanks(BankDto.Request request) {
+        return bankService.getBanks(request);
+    }
 
     @ApiOperation(value = "금융사 삭제")
     @DeleteMapping
@@ -46,7 +48,7 @@ public class BankController {
 
     @ApiOperation(value = "부수거래 항목")
     @GetMapping("/sales")
-    public PagableDto.Response<BankDto.Response> getSales(BankDto.Request response) {
+    public PagableDto.Response<BankDto.SaleResponse> getSales(BankDto.Request response) {
         return bankService.getPageSales(response);
     }
 

@@ -13,6 +13,7 @@ import com.template.api.utils.dtos.PagableDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(readOnly = true)
 @Qualifier("BankServiceImpl")
+@Primary
 
 public class BankServiceImpl {
 
@@ -33,14 +35,26 @@ public class BankServiceImpl {
 
 
     // todo: 금융사명 조회
-    public List<BankDto.Response> getBanks(){
-        List<Bank> bank = bankRepository.findAll();
-        List<BankDto.Response> responses = bank.stream().map(Bank::toResponse).collect(Collectors.toList());
-        return responses;
+    public PagableDto.Response<BankDto.Response> getBanks(BankDto.Request request){
+
+        Sort sort = Sort.by(Sort.Order.desc("createdAt"));
+        if (StringUtils.isNotBlank(request.getSort())) {
+            sort = Sort.by(request.getOrder().dir, request.getSort());
+        }
+        Restrictions r = new Restrictions();
+        r.eq("isActive", true);
+
+        PageRequest pageRequest = PageRequest.of(request.getPage(), request.getLimit(), sort);
+
+        Page<Bank> items = bankRepository.findAll(r.output(), pageRequest);
+
+        PagableDto.Response<BankDto.Response> pages = PagableDto.Response.of(items); //Page response mapping
+
+        return pages;
     }
  // todo: 부수거래
     @Transactional
-    public PagableDto.Response<BankDto.Response> getPageSales(BankDto.Request request){
+    public PagableDto.Response<BankDto.SaleResponse> getPageSales(BankDto.Request request){
 
         Sort sort = Sort.by(Sort.Order.desc("createdAt"));
         if (StringUtils.isNotBlank(request.getSort())){
@@ -51,16 +65,28 @@ public class BankServiceImpl {
         r.eq("isActive", true);
         PageRequest pageRequest = PageRequest.of(request.getPage(), request.getLimit(), sort);
         Page<Bank> items = bankRepository.findAll(r.output(), pageRequest);
-        PagableDto.Response<BankDto.Response> pages = PagableDto.Response.of(items);
+        PagableDto.Response<BankDto.SaleResponse> pages = PagableDto.Response.of(items);
 
         return pages;
     }
 
     // todo: 금융사 등록
     @Transactional
-    public void createBankName(BankDto.Create create){
-        Bank bank = BankDtoMapper.INSTANCE.create(create);
-        bankRepository.save(bank);
+    public void createBankName(BankDto.Create create) throws NotFoundException{
+        if (create == null){
+            throw new NotFoundException("동일한 금융사가 있습니다.");
+        } else {
+
+            Bank bank = BankDtoMapper.INSTANCE.create(create);
+
+            for (BankDto.SaleCreate item : create.getDiscountRows()) {
+                bank.setRate(bank.getAddRate() + bank.getBaseRate() - item.getDiscountRate());
+            }
+
+            List<Sales> discountRow = Lists.newArrayList();
+            bank.getDiscountRow().addAll(discountRow);
+            bankRepository.save(bank);
+        }
     }
 
     // todo: 금융사 삭제

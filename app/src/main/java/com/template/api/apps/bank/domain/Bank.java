@@ -19,7 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "financeCompany")
+@Table(name = "Banks")
 public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.Response> {
 
     private String bankId;
@@ -39,14 +39,14 @@ public class Bank extends BaseDomainWithId implements DomainWithMapper<BankDto.R
     private String bLogo; // 큰 로고 이미지
     private String sLogo; // 작은 로고 이미지
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy  ="bank", fetch = FetchType.LAZY)
     private List<Sales> discountRow = Lists.newArrayList(); // 부수거래 항목
 //
 //    private String discountCondition; // 부수거래 내용
 //    private Double discountRate; // 부수거래 이자
 
 
-
+    @Override
     public BankDto.Response toResponse(){return BankDtoMapper.INSTANCE.toResponse(this);
     }
 }

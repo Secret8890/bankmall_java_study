@@ -45,7 +45,7 @@ public class BankDto  {
         @ApiModelProperty(value = "가산 금리")
         private Double addRate;
 
-        @ManyToOne
+
         @ApiModelProperty(value = "부수거래 항목")
         private List<SaleCreate> discountRows = Lists.newArrayList();
 
@@ -65,7 +65,7 @@ public class BankDto  {
         private String repaymentFees;
 
         @ApiModelProperty(value = "중도상환수수료 몇 년간")
-        private String repaymentApplyyear;
+        private String repaymentApplyYear;
 
         @ApiModelProperty(value = "중도상환수수료 면제")
         private String repaymentExemption;
@@ -119,7 +119,7 @@ public class BankDto  {
         private String repaymentFees;
 
         @ApiModelProperty(value = "중도상환수수료 몇 년간")
-        private String repaymentApplyyear;
+        private String repaymentApplyYear;
 
         @ApiModelProperty(value = "중도상환수수료 면제")
         private String repaymentExemption;
@@ -133,7 +133,6 @@ public class BankDto  {
         @ApiModelProperty(value = "작은로고 이미지")
         private String sLogo;
 
-        @ManyToOne
         @ApiModelProperty(value = "Sale Lists")
         private List<SaleResponse> discountRows = Lists.newArrayList();
     }
@@ -142,8 +141,7 @@ public class BankDto  {
     @Setter
     @ApiModel("BankDto_Update")
     public static class Update{
-        @ApiModelProperty(value = "은행관리번호")
-        private  Long id;
+
 
         @ApiModelProperty(value = "금융사명")
         private  String bankName;
@@ -160,7 +158,6 @@ public class BankDto  {
         @ApiModelProperty(value = "가산 금리")
         private Double addRate;
 
-        @ManyToOne
         @ApiModelProperty(value = " Sale Lists")
         private List<SaleUpdate> discountRows = Lists.newArrayList();
 
@@ -180,7 +177,7 @@ public class BankDto  {
         private String repaymentFees;
 
         @ApiModelProperty(value = "중도상환수수료 몇 년간")
-        private String repaymentApplyyear;
+        private String repaymentApplyYear;
 
         @ApiModelProperty(value = "중도상환수수료 면제")
         private String repaymentExemption;
@@ -193,7 +190,6 @@ public class BankDto  {
 
         @ApiModelProperty(value = "작은로고 이미지")
         private String sLogo;
-
 
     }
 
@@ -214,7 +210,7 @@ public class BankDto  {
     @Getter
     @Setter
     @ApiModel("BankDto_SaleUpdate")
-    public static class SaleUpdate {
+    public static class SaleUpdate extends SaleResponse {
 
         @ApiModelProperty(value = "부수거래 내용")
         private String discountCondition;
