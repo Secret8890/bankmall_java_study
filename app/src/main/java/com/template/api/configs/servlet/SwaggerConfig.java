@@ -35,7 +35,7 @@ import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Profile({"!prod", "!prod*"})
+//@Profile({"!prod", "!prod*"})
 @EnableSwagger2
 @RequiredArgsConstructor
 @Configuration
@@ -59,7 +59,7 @@ public class SwaggerConfig {
         .paths(PathSelectors.ant("/api/**"))
         .build()
         .directModelSubstitute(LocalDate.class, String.class)
-        .directModelSubstitute(YearMonth.class, String.class)
+        //.directModelSubstitute(YearMonth.class, String.class)
         .genericModelSubstitutes(ResponseEntity.class)
         .alternateTypeRules(
             newRule(

@@ -4,7 +4,6 @@ package com.template.api.apps.postcodes.controller;
 import com.google.common.collect.Lists;
 import com.template.api.apps.logs.dto.LogFileUploadDto;
 import com.template.api.apps.logs.service.LogFileUploadService;
-import com.template.api.apps.postcodes.domain.AptSalesRepository;
 import com.template.api.apps.postcodes.dto.PostcodeDto;
 import com.template.api.apps.postcodes.service.PostCodeService;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +30,7 @@ import java.util.List;
 @Secured(("ROLE_ADMIN"))
 public class PostcodeCMSController {
 
-    private final AptSalesRepository aptSalesRepository;
+    //private final AptSalesRepository aptSalesRepository;
     private final PostCodeService postCodeService;
     private final LogFileUploadService logFileUploadService;
 
