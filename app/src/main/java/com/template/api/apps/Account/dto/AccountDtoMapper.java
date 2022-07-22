@@ -8,7 +8,9 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 @Mapper
-public interface AccountDtoMapper extends BaseDtoMapper<Account, AccountDto.Response, AccountDto.Create, AccountDto.Update> {
+public interface AccountDtoMapper extends BaseDtoMapper
+      //  <Account, AccountDto.Response, AccountDto.Create, AccountDto.Update>
+{
 
     AccountDtoMapper INSTANCE = Mappers.getMapper(AccountDtoMapper.class);
     AccountDto.Response toResponse(Account accounts);

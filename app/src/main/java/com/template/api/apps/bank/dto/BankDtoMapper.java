@@ -10,7 +10,9 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface BankDtoMapper extends BaseDtoMapper<Bank, BankDto.Response, BankDto.Create, BankDto.SaleCreate> {
+public interface BankDtoMapper extends BaseDtoMapper
+     //   <Bank, BankDto.Response, BankDto.Create, BankDto.SaleCreate>
+{
 
     BankDtoMapper INSTANCE = Mappers.getMapper(BankDtoMapper.class);
     BankDto.Response toResponse(Bank Banks);

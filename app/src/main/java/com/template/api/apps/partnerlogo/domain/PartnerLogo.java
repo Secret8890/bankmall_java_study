@@ -15,7 +15,9 @@ import javax.persistence.Table;
 @Getter @Setter
 @Entity
 @Table
-public class PartnerLogo extends BaseDomainWithId implements DomainWithMapper<PartnerLogoDto.Response> {
+public class PartnerLogo extends BaseDomainWithId implements DomainWithMapper
+      // <PartnerLogoDto.Response>
+{
 
     @Column(nullable = false, unique = true)
     private String partnerName ; // 파트너사 명칭

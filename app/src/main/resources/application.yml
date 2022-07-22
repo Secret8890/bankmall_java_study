@@ -70,3 +70,5 @@ logging:
       max-file-size: 100MB
       max-history: 10
       file-name-pattern: ${app.host}.%d{yyyy-MM-dd}-%i.log
+
+

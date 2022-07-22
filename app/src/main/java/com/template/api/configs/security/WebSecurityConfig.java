@@ -6,6 +6,7 @@ import com.template.api.security.support.RestAuthenticationSuccessHandler;
 import com.template.api.security.support.RestLogoutSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -28,6 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   private final RestAuthenticationFailureHandler restAuthenticationFailureHandler;
   private final RestAuthenticationSuccessHandler restAuthenticationSuccessHandler;
   private final RestLogoutSuccessHandler restLogoutSuccessHandler;
+
+  //private final AccountAuthenticationProvider accountAuthenticationProvider;
+
+  private final RestTemplateBuilder restTemplateBuilder;
+
 
   @Bean
   @ConditionalOnMissingBean
@@ -96,5 +103,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .cors();
   }
 
+  /**
+ * @return the rest template
+   */
+  @Bean
+  @ConditionalOnMissingBean
+  public RestTemplate restTemplate() {
+    return restTemplateBuilder.build();
+  }
 
 }
